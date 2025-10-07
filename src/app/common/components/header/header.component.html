@@ -1,0 +1,16 @@
+<!-- Header -->
+<header class="bg-white border-b border-gray-200">
+  <!-- Top Navigation Bar (Dark Blue) -->
+  <div class="bg-blue-900 h-1"></div>
+
+  <!-- Main Header Content -->
+  <div class="px-6 py-6">
+    <div class="flex items-center justify-between">
+      <!-- Left side - Page Title and Breadcrumb -->
+      <div class="flex flex-col space-y-2">
+        <h1 class="text-3xl font-bold text-gray-900">{{ pageTitle }}</h1>
+        <app-breadcrumb [items]="breadcrumbItems"></app-breadcrumb>
+      </div>
+    </div>
+  </div>
+</header>

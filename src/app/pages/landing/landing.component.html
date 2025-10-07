@@ -1,0 +1,21 @@
+<!-- Main Layout Container -->
+<div class="flex h-screen bg-gray-100">
+  <!-- Side Navigation -->
+  <app-side-nav
+    [isCollapsed]="isSideNavCollapsed"
+    (navItemClick)="onNavItemClick($event)"
+    (toggleCollapse)="onToggleCollapse()"
+  >
+  </app-side-nav>
+
+  <!-- Main Content Area -->
+  <div class="flex-1 flex flex-col overflow-hidden transition-all duration-300">
+    <!-- Header -->
+    <app-header [breadcrumbItems]="breadcrumbItems" [pageTitle]="pageTitle"> </app-header>
+
+    <!-- Main Content with Dashboard -->
+    <main class="flex-1 overflow-auto">
+      <router-outlet />
+    </main>
+  </div>
+</div>

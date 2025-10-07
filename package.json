@@ -1,0 +1,64 @@
+{
+  "name": "nx-learner",
+  "version": "0.0.0",
+  "scripts": {
+    "ng": "ng",
+    "start": "ng serve",
+    "build": "ng build",
+    "watch": "ng build --watch --configuration development",
+    "test": "ng test",
+    "lint": "npx eslint \"src/**/*.{js,ts,html}\" --quiet --fix",
+    "format": "npx prettier \"src/**/*.{js,ts,html,css,scss}\" --write",
+    "prepare": "husky install",
+    "lint-staged": "lint-staged"
+  },
+  "private": true,
+  "dependencies": {
+    "@angular/common": "^19.2.0",
+    "@angular/compiler": "^19.2.0",
+    "@angular/core": "^19.2.0",
+    "@angular/forms": "^19.2.0",
+    "@angular/platform-browser": "^19.2.0",
+    "@angular/platform-browser-dynamic": "^19.2.0",
+    "@angular/router": "^19.2.0",
+    "@ngrx/effects": "^20.0.1",
+    "@ngrx/entity": "^20.0.1",
+    "@ngrx/store": "^20.0.1",
+    "@ngrx/store-devtools": "^20.0.1",
+    "@tailwindcss/postcss": "^4.1.14",
+    "postcss": "^8.5.6",
+    "rxjs": "~7.8.0",
+    "tailwindcss": "^4.1.14",
+    "tslib": "^2.3.0",
+    "zone.js": "~0.15.0"
+  },
+  "devDependencies": {
+    "@angular-devkit/build-angular": "^19.2.17",
+    "@angular/cli": "^19.2.17",
+    "@angular/compiler-cli": "^19.2.0",
+    "@types/jasmine": "~5.1.0",
+    "angular-eslint": "^20.3.0",
+    "autoprefixer": "^10.4.21",
+    "eslint": "^9.37.0",
+    "eslint-plugin-tailwindcss": "^3.18.2",
+    "eslint-plugin-unused-imports": "^4.2.0",
+    "husky": "^9.1.7",
+    "jasmine-core": "~5.6.0",
+    "karma": "~6.4.0",
+    "karma-chrome-launcher": "~3.2.0",
+    "karma-coverage": "~2.2.0",
+    "karma-jasmine": "~5.1.0",
+    "karma-jasmine-html-reporter": "~2.1.0",
+    "lint-staged": "^16.2.3",
+    "prettier": "^3.6.2",
+    "typescript": "~5.7.2",
+    "typescript-eslint": "^8.46.0"
+  },
+  "lint-staged": {
+    "*.{ts,html,css,scss}": [
+      "prettier --write",
+      "eslint --fix",
+      "git add"
+    ]
+  }
+}

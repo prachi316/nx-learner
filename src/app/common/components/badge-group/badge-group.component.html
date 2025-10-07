@@ -1,0 +1,12 @@
+<!-- Badge Group Container -->
+<div [class]="getContainerClasses()">
+  @for (badge of badges; track badge.id) {
+    <app-badge
+      [badge]="badge"
+      [config]="config"
+      (badgeClick)="onBadgeClick($event)"
+      (badgeRemove)="onBadgeRemove($event)"
+    >
+    </app-badge>
+  }
+</div>
