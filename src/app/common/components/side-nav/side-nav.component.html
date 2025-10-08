@@ -11,7 +11,7 @@
         <app-icon theIcon="company-logo" width="44" height="44" color="white"></app-icon>
       </div>
       <button
-        class="p-2 hover:bg-gray-700 rounded-lg transition-colors"
+        class="p-2 hover:bg-gray-700 rounded-lg transition-colors cursor-pointer"
         (click)="onToggleCollapse()"
       >
         <app-icon theIcon="menu" width="20" height="20" color="black"></app-icon>
@@ -59,14 +59,19 @@
   </div>
 
   <!-- Navigation Links (scrollable) -->
-  <div class="flex-1 min-h-0 overflow-y-auto py-6 px-4" [class.px-0]="isCollapsed">
-    <nav class="space-y-8">
+  <div
+    class="flex-1 min-h-0 overflow-y-auto py-6"
+    [class.px-4]="!isCollapsed"
+    [class.px-0]="isCollapsed"
+  >
+    <nav class="space-y-2">
       @for (item of navItems; track item.id) {
         <a
-          class="group flex items-center px-3 py-4 transition-colors relative rounded-lg"
+          class="group flex items-center h-12 transition-colors relative rounded-lg cursor-pointer"
           [class.justify-center]="isCollapsed"
           [class.w-full]="isCollapsed"
           [class.px-0]="isCollapsed"
+          [class.px-3]="!isCollapsed"
           [class.rounded-none]="isCollapsed"
           [class.bg-yellow-200]="item.active"
           [class.text-gray-800]="item.active"
@@ -78,7 +83,8 @@
           <img
             [src]="'assets/icon/' + item.icon + '.svg'"
             [alt]="item.label"
-            class="w-6 h-6 mr-4"
+            class="w-6 h-6"
+            [class.mr-4]="!isCollapsed"
             [class.mr-0]="isCollapsed"
             [class.opacity-100]="item.active"
             [class.opacity-70]="!item.active"
