@@ -75,15 +75,14 @@
           (click)="onNavItemClick(item)"
         >
           <!-- Icon -->
-          <app-icon
-            [theIcon]="item.icon"
-            width="24"
-            height="24"
-            color="currentColor"
+          <img
+            [src]="'assets/icon/' + item.icon + '.svg'"
+            [alt]="item.label"
             class="w-6 h-6 mr-4"
             [class.mr-0]="isCollapsed"
-            [class.fill-current]="item.active"
-          ></app-icon>
+            [class.opacity-100]="item.active"
+            [class.opacity-70]="!item.active"
+          />
 
           <span
             class="font-sans font-normal text-base leading-6 tracking-normal group-hover:font-extrabold"

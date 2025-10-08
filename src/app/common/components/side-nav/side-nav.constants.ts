@@ -2,21 +2,21 @@ import { NavItem } from './side-nav.types';
 
 // Navigation items configuration
 export const NAV_ITEMS: NavItem[] = [
-  { id: 'feed', label: 'Feed', icon: 'home', href: '/feed' },
-  { id: 'course', label: 'Course', icon: 'book', active: true, href: '/course-details' },
-  { id: 'pickup', label: 'Pickup', icon: 'truck', href: '/pickup' },
+  { id: 'feed', label: 'Feed', icon: 'feed', href: '/feed' },
+  { id: 'course', label: 'Course', icon: 'course', active: true, href: '/course-details' },
+  { id: 'pickup', label: 'Pickup', icon: 'pickup', href: '/pickup' },
   { id: 'chat', label: 'Chat', icon: 'chat', href: '/chat' },
   {
     id: 'course-management',
     label: 'Course Management',
-    icon: 'books',
+    icon: 'course',
     href: '/course-management',
   },
-  { id: 'vcr', label: 'VCR', icon: 'video', href: '/vcr' },
+  { id: 'vcr', label: 'VCR', icon: 'vcr', href: '/vcr' },
   {
     id: 'grade-management',
     label: 'Grade Management',
-    icon: 'document',
+    icon: 'grade',
     href: '/grade-management',
   },
 ];
