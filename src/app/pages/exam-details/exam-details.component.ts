@@ -10,6 +10,7 @@ import { BreadcrumbService } from '../../common/services/breadcrumb.service';
   standalone: true,
 })
 export class ExamDetailsComponent implements OnInit {
+  exam: any;
   constructor(private breadcrumbService: BreadcrumbService) {}
 
   ngOnInit(): void {
