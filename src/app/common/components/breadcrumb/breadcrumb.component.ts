@@ -2,13 +2,12 @@ import { Component, Input, OnInit, OnDestroy } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { Subscription } from 'rxjs';
-import { IconComponent } from '../icon/icon.component';
 import { BreadcrumbItem } from './breadcrumb.types';
 import { BreadcrumbService } from '../../services/breadcrumb.service';
 
 @Component({
   selector: 'app-breadcrumb',
-  imports: [CommonModule, RouterModule, IconComponent],
+  imports: [CommonModule, RouterModule],
   templateUrl: './breadcrumb.component.html',
   standalone: true,
 })
