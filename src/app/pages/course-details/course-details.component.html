@@ -1,74 +1,100 @@
 <!-- Course Details Page -->
 <div class="p-6 bg-stone-50 min-h-screen">
   <!-- Course Header -->
-  <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-6 mb-6">
-    <div class="flex items-start gap-6">
-      <!-- Chemistry Icon -->
-      <div class="flex-shrink-0">
-        <div
-          class="w-16 h-16 bg-gradient-to-br from-blue-100 to-blue-200 rounded-lg flex items-center justify-center"
-        >
-          <!-- Chemistry Flask Icon -->
-          <div class="relative">
-            <!-- Main Flask -->
-            <div class="w-8 h-10 bg-blue-200 rounded-t-lg rounded-b-sm relative">
-              <div
-                class="absolute top-1 left-1 right-1 bottom-1 bg-blue-300 rounded-t-md rounded-b-sm"
-              ></div>
-              <!-- Bubbles -->
-              <div class="absolute top-2 left-2 w-1 h-1 bg-blue-400 rounded-full"></div>
-              <div class="absolute top-3 right-2 w-1 h-1 bg-blue-400 rounded-full"></div>
-              <div class="absolute top-4 left-3 w-1 h-1 bg-blue-400 rounded-full"></div>
-            </div>
-            <!-- Test Tube -->
-            <div class="absolute -top-1 -right-1 w-4 h-6 bg-pink-200 rounded-t-lg rounded-b-sm">
-              <div
-                class="absolute top-1 left-0.5 right-0.5 bottom-1 bg-pink-300 rounded-t-md rounded-b-sm"
-              ></div>
-            </div>
-          </div>
-        </div>
+  <div class="bg-[#F3F8FB] border border-gray-200 rounded-xl shadow-sm p-5 sm:p-6">
+    <div class="flex items-start gap-4 sm:gap-6">
+      <!-- Icon -->
+      <div class="shrink-0">
+        <img src="assets/Subject.svg" alt="User avatar" class="" />
       </div>
 
-      <!-- Course Information -->
+      <!-- Info -->
       <div class="flex-1">
-        <!-- Course Title and Status -->
-        <div class="mb-4">
-          <h1 class="text-3xl font-bold text-gray-900 mb-2">{{ courseInfo.title }}</h1>
-          <p class="text-lg text-gray-700 capitalize">{{ courseInfo.status }}</p>
+        <!-- Title + Status -->
+        <div class="mb-3">
+          <h2 class="text-xl sm:text-2xl font-semibold text-gray-900 leading-snug">
+            {{ courseInfo.title }}
+          </h2>
+          <p class="text-sm sm:text-base text-gray-700 capitalize">
+            {{ courseInfo.status }}
+          </p>
         </div>
 
-        <!-- Progress Bar -->
-        <div class="mb-4">
-          <div class="w-full bg-gray-200 rounded-full h-3">
-            <div class="bg-blue-500 h-3 rounded-full" [style.width.%]="courseInfo.progress"></div>
+        <!-- Progress -->
+        <div class="mb-3">
+          <div class="w-full h-3 rounded-full bg-gray-200/80">
+            <div
+              class="h-3 rounded-full bg-blue-500 transition-[width] duration-300 ease-out"
+              [style.width.%]="courseInfo.progress"
+              role="progressbar"
+              [attr.aria-valuenow]="courseInfo.progress"
+              aria-valuemin="0"
+              aria-valuemax="100"
+            ></div>
           </div>
         </div>
 
         <!-- Todos -->
-        <div class="text-sm text-gray-600">
-          Todos: <span class="font-medium">{{ courseInfo.todos.pending }} pending</span>,
-          <span class="font-medium">{{ courseInfo.todos.missed }} Missed</span>
-        </div>
+        <p class="text-xs sm:text-sm text-gray-600">
+          Todos:
+          <span class="font-medium">{{ courseInfo.todos.pending }}</span> pending,
+          <span class="font-medium">{{ courseInfo.todos.missed }}</span> missed
+        </p>
       </div>
+    </div>
+  </div>
+  <!-- Author and Level Pills -->
+  <div class="py-3">
+    <!-- Author Section -->
+    <p class="font-sans font-extrabold text-sm leading-normal tracking-normal text-gray-900">
+      by <span class="font-extrabold">Ahmed Al-Farouq</span>,
+      <span class="font-extrabold">Talha Munir</span>
+    </p>
+
+    <!-- Level Pills -->
+    <div class="flex gap-[4px] my-2">
+      <!-- Level 1 -->
+      <span
+        class="px-3 py-1.5 text-sm font-semibold text-gray-900 rounded-full border border-[#13151714] bg-[#F6F3FB] opacity-100"
+      >
+        Level 1
+      </span>
+
+      <!-- Level 2 -->
+      <span
+        class="px-3 py-1.5 text-sm font-semibold text-gray-900 rounded-full border border-[#13151714] bg-[#FBF4F3] opacity-100"
+      >
+        Level 2
+      </span>
     </div>
   </div>
 
   <!-- Main Content -->
   <div class="">
     <!-- All Topics Section -->
+    <!-- Header: matches screenshot -->
     <div class="mb-6">
-      <div class="flex flex-col justify-between mb-4">
-        <h2 class="text-xl font-bold text-gray-900">All topics</h2>
-        <div class="flex items-center text-gray-500">
-          <span class="text-sm mr-2">SPRING SEMESTER 2023-2024</span>
-          <app-icon
-            theIcon="chevron-right"
-            width="16"
-            height="16"
-            color="#EAB308"
-            class="text-yellow-500"
-          ></app-icon>
+      <div class="space-y-2">
+        <h2 class="text-2xl sm:text-3xl font-extrabold text-gray-900">All topics</h2>
+
+        <div class="flex items-center gap-2 text-slate-500">
+          <span class="text-sm font-medium tracking-wide uppercase">
+            Spring Semester 2023-2024
+          </span>
+
+          <!-- Yellow circular chevron -->
+          <button
+            type="button"
+            class="inline-flex h-7 w-7 items-center justify-center rounded-full bg-yellow-400 text-gray-900 shadow-sm ring-1 ring-yellow-300/60 hover:bg-yellow-300 focus:outline-none focus:ring-2 focus:ring-yellow-400"
+            aria-label="Open semester"
+          >
+            <app-icon
+              theIcon="chevron-right"
+              width="16"
+              height="16"
+              class="text-current"
+            ></app-icon>
+          </button>
         </div>
       </div>
     </div>
