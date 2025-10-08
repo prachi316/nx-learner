@@ -5,20 +5,16 @@
   [class.w-16]="isCollapsed"
 >
   <!-- Header Section -->
-  <div class="bg-gray-800 px-4 py-3">
+  <div class="bg-surface-page px-4 py-3">
     <div class="flex items-center justify-between">
-      <div class="text-2xl font-bold text-white" [class.hidden]="isCollapsed">nx.</div>
+      <div [class.hidden]="isCollapsed">
+        <app-icon theIcon="company-logo" width="44" height="44" color="white"></app-icon>
+      </div>
       <button
         class="p-2 hover:bg-gray-700 rounded-lg transition-colors"
         (click)="onToggleCollapse()"
       >
-        <app-icon
-          theIcon="menu"
-          width="20"
-          height="20"
-          color="white"
-          class="w-5 h-5 text-white"
-        ></app-icon>
+        <app-icon theIcon="menu" width="20" height="20" color="black"></app-icon>
       </button>
     </div>
   </div>
