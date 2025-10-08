@@ -1,7 +1,20 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
 import { IconComponent, TabsComponent, ModalComponent } from '@nx-learner/components';
 import { TabItem, BadgeItem, CourseInfo, ProgressCard } from '@nx-learner/types';
+
+// Form interface for exam creation
+interface ExamFormData {
+  title: string;
+  description: string;
+  startDate: string;
+  startTime: string;
+  dueDate: string;
+  dueTime: string;
+  duration: string;
+  attempts: number;
+}
 import { BreadcrumbService } from '../../common/services/breadcrumb.service';
 import {
   MAIN_TABS,
@@ -13,7 +26,7 @@ import {
 
 @Component({
   selector: 'app-course-details',
-  imports: [IconComponent, TabsComponent, ModalComponent],
+  imports: [IconComponent, TabsComponent, ModalComponent, ReactiveFormsModule],
   templateUrl: './course-details.component.html',
   standalone: true,
 })
@@ -21,11 +34,31 @@ export class CourseDetailsComponent implements OnInit {
   constructor(
     private router: Router,
     private breadcrumbService: BreadcrumbService,
+    private fb: FormBuilder,
   ) {}
 
   ngOnInit(): void {
     // Set intelligent breadcrumbs with course context
     this.breadcrumbService.setCourseBreadcrumbs(this.courseInfo.title);
+
+    // Initialize the reactive form
+    this.initializeForm();
+  }
+
+  private initializeForm(): void {
+    this.examForm = this.fb.group({
+      title: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(100)]],
+      description: ['', [Validators.required, Validators.minLength(10), Validators.maxLength(500)]],
+      startDate: ['', Validators.required],
+      startTime: ['', Validators.required],
+      dueDate: ['', Validators.required],
+      dueTime: ['', Validators.required],
+      duration: [
+        '',
+        [Validators.required, Validators.pattern(/^\d+\s*(min|minutes?|hr|hour|hours?)$/i)],
+      ],
+      attempts: [1, [Validators.required, Validators.min(1), Validators.max(10)]],
+    });
   }
 
   // Course information
@@ -48,6 +81,9 @@ export class CourseDetailsComponent implements OnInit {
   isModalOpen = false;
   isCreateModalOpen = false;
   selectedOption = '';
+
+  // Reactive form for exam creation
+  examForm!: FormGroup;
 
   onMainTabChange(tab: TabItem): void {
     console.log('Main tab changed:', tab);
@@ -92,15 +128,32 @@ export class CourseDetailsComponent implements OnInit {
   }
 
   onCreateExam(): void {
-    // Close the create modal
-    this.closeCreateModal();
+    if (this.examForm.valid) {
+      const formData: ExamFormData = this.examForm.value;
+      console.log('Creating exam with data:', formData);
 
-    // Simulate exam creation success and redirect to exam details
-    console.log('Creating exam:', this.selectedOption);
+      // Close the create modal
+      this.closeCreateModal();
 
-    // Redirect to exam details page after a short delay
-    setTimeout(() => {
-      this.router.navigate(['/exam-details']);
-    }, 500);
+      // Simulate exam creation success and redirect to exam details
+      setTimeout(() => {
+        this.router.navigate(['/exam-details']);
+      }, 500);
+    } else {
+      // Mark all fields as touched to show validation errors
+      this.examForm.markAllAsTouched();
+      console.log('Form is invalid:', this.examForm.errors);
+    }
+  }
+
+  // Helper method to get form control for template
+  getFormControl(controlName: string) {
+    return this.examForm.get(controlName);
+  }
+
+  // Helper method to check if field has error
+  hasError(controlName: string, errorType: string): boolean {
+    const control = this.getFormControl(controlName);
+    return control ? control.hasError(errorType) && control.touched : false;
   }
 }
