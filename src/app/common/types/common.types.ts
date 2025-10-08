@@ -137,9 +137,9 @@ export interface ProgressCard {
   title: string;
   subtitle: string;
   icon: string;
-  iconColor: string;
-  iconBgColor: string;
-  iconTextColor: string;
+  iconColor?: string;
+  iconBgColor?: string;
+  iconTextColor?: string;
   progress: number;
   completed: number;
   total: number;
