@@ -5,7 +5,7 @@
     <div class="flex items-start gap-4 sm:gap-6">
       <!-- Icon -->
       <div class="shrink-0">
-        <img src="assets/Subject.svg" alt="User avatar" class="" />
+        <img src="assets/Subject.svg" alt="User avatar" />
       </div>
 
       <!-- Info -->
@@ -46,7 +46,7 @@
   <!-- Author and Level Pills -->
   <div class="py-6">
     <!-- Author Section -->
-    <p class="font-sans font-extrabold text-sm leading-normal tracking-normal text-gray-900">
+    <p class="font-sans font-extrabold text-sm leading-normal tracking-normal text-[#727688]">
       by <span class="font-extrabold">Ahmed Al-Farouq</span>,
       <span class="font-extrabold">Talha Munir</span>
     </p>
@@ -137,7 +137,7 @@
     </div>
 
     <!-- Weekly Navigation -->
-    <div class="bg-yellow-400 rounded-full p-4 mb-6">
+    <div class="bg-[#FFF7DD] border-2 border-[#1315170A] rounded-full p-3 mb-6">
       <div class="flex items-center justify-between">
         <button class="p-2 hover:bg-yellow-500 rounded-full transition-colors">
           <app-icon
@@ -148,9 +148,10 @@
             class="text-gray-700"
           ></app-icon>
         </button>
-        <div class="text-center">
-          <div class="font-bold text-gray-900 text-lg">Week 1</div>
-          <div class="text-sm text-gray-700">(01/04/2025 - 07/04/2025)</div>
+        <div class="text-center bg-yellow-400 flex-1 mx-2 rounded-full py-3">
+          <div class="font-bold text-gray-900 text-lg">
+            Week 1 <span class="text-sm text-gray-700">(01/04/2025 - 07/04/2025)</span>
+          </div>
         </div>
         <button class="p-2 hover:bg-yellow-500 rounded-full transition-colors">
           <app-icon
@@ -165,8 +166,8 @@
     </div>
 
     <!-- Topic Section -->
-    <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-6 mb-6">
-      <h3 class="text-xl font-bold text-gray-900 mb-3">Atomic structure and Periodic Table</h3>
+    <div class="p-6 mb-6">
+      <h3 class="text-xl font-bold text-[#727688] mb-3">Atomic structure and Periodic Table</h3>
       <p class="text-gray-600 mb-4">
         Figma design and FigJam are two products that, when used together, support your entire
         design process. While you might begin
@@ -197,39 +198,34 @@
       </div>
 
       <!-- Empty State -->
-      <div class="text-center py-16">
-        <div class="mb-6">
-          <!-- Confused Animal Character -->
-          <div
-            class="mx-auto w-32 h-32 bg-amber-100 rounded-full flex items-center justify-center relative"
+      <div class="min-h-[40vh] bg-white flex items-center justify-center px-4">
+        <div class="flex flex-col items-center text-center gap-5">
+          <!-- Illustration -->
+          <img
+            src="assets/Group.svg"
+            alt="No items"
+            class="w-40 h-40 object-contain select-none pointer-events-none"
+          />
+
+          <!-- Title -->
+          <h3 class="font-extrabold text-lg text-gray-800">No WorkItem Added</h3>
+
+          <!-- Subtitle -->
+          <p class="max-w-md text-sm text-slate-500">
+            As soon as teacher uploads it will come here
+          </p>
+
+          <!-- CTA -->
+          <button
+            (click)="openModal()"
+            type="button"
+            class="mt-1 inline-flex h-12 w-56 items-center justify-center rounded-[12px] border-2 border-[#FED143] bg-white text-gray-800 font-semibold shadow-[0_4px_0_0] shadow-[#FED143] hover:translate-y-[1px] hover:shadow-[0_3px_0_0] focus:outline-none focus:ring-2 focus:ring-yellow-400"
           >
-            <div class="w-20 h-20 bg-amber-200 rounded-full flex items-center justify-center">
-              <div class="w-12 h-12 bg-amber-300 rounded-full flex items-center justify-center">
-                <div class="w-8 h-8 bg-amber-400 rounded-full flex items-center justify-center">
-                  <div class="w-4 h-4 bg-amber-500 rounded-full"></div>
-                </div>
-              </div>
-            </div>
-            <!-- Question marks speech bubble -->
-            <div class="absolute -top-8 left-1/2 transform -translate-x-1/2">
-              <div class="bg-yellow-300 rounded-full px-3 py-1 text-2xl font-bold text-gray-700">
-                ??
-              </div>
-              <div
-                class="absolute top-full left-1/2 transform -translate-x-1/2 w-0 h-0 border-l-4 border-r-4 border-t-4 border-l-transparent border-r-transparent border-t-yellow-300"
-              ></div>
-            </div>
-          </div>
+            Add
+          </button>
         </div>
-        <h4 class="text-xl font-bold text-gray-900 mb-2">No WorkItem Added</h4>
-        <p class="text-gray-500 mb-8 text-lg">As soon as teacher uploads it will come here</p>
-        <button
-          (click)="openModal()"
-          class="bg-yellow-400 hover:bg-yellow-500 text-gray-900 px-12 py-4 rounded-full font-medium transition-colors text-lg"
-        >
-          Add
-        </button>
       </div>
+      <!-- Empty state -->
     </div>
   </div>
 
