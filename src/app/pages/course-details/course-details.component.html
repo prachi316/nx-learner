@@ -198,32 +198,69 @@
       </div>
 
       <!-- Empty State -->
-      <div class="min-h-[40vh] bg-white flex items-center justify-center px-4">
-        <div class="flex flex-col items-center text-center gap-5">
-          <!-- Illustration -->
-          <img
-            src="assets/Group.svg"
-            alt="No items"
-            class="w-40 h-40 object-contain select-none pointer-events-none"
-          />
+      <div class="min-h-[40vh] bg-white px-4">
+        @if (exams.length === 0) {
+          <div class="flex flex-col items-center text-center gap-5">
+            <!-- Illustration -->
+            <img
+              src="assets/Group.svg"
+              alt="No items"
+              class="w-40 h-40 object-contain select-none pointer-events-none"
+            />
 
-          <!-- Title -->
-          <h3 class="font-extrabold text-lg text-gray-800">No WorkItem Added</h3>
+            <!-- Title -->
+            <h3 class="font-extrabold text-lg text-gray-800">No WorkItem Added</h3>
 
-          <!-- Subtitle -->
-          <p class="max-w-md text-sm text-slate-500">
-            As soon as teacher uploads it will come here
-          </p>
+            <!-- Subtitle -->
+            <p class="max-w-md text-sm text-slate-500">
+              As soon as teacher uploads it will come here
+            </p>
 
-          <!-- CTA -->
-          <button
-            (click)="openModal()"
-            type="button"
-            class="mt-1 inline-flex h-12 w-56 items-center justify-center rounded-[12px] border-2 border-[#FED143] bg-white text-gray-800 font-semibold shadow-[0_4px_0_0] shadow-[#FED143] hover:translate-y-[1px] hover:shadow-[0_3px_0_0] focus:outline-none focus:ring-2 focus:ring-yellow-400"
-          >
-            Add
-          </button>
-        </div>
+            <!-- CTA -->
+            <button
+              (click)="openModal()"
+              type="button"
+              class="mt-1 inline-flex h-12 w-56 items-center justify-center rounded-[12px] border-2 border-[#FED143] bg-white text-gray-800 font-semibold shadow-[0_4px_0_0] shadow-[#FED143] hover:translate-y-[1px] hover:shadow-[0_3px_0_0] focus:outline-none focus:ring-2 focus:ring-yellow-400"
+            >
+              Add
+            </button>
+          </div>
+        } @else {
+          <div class="flex flex-wrap gap-6">
+            @for (exam of currentCourseExams; track exam.id) {
+              <div
+                class="relative flex flex-col justify-center gap-2 items-center cursor-pointer hover:scale-105 transition-transform duration-200"
+                (click)="onExamClick(exam.id)"
+              >
+                <!-- Exam Icon -->
+                <div
+                  class="flex justify-center justify-center items-center border-8 rounded-4xl border-warm-gray h-28 w-28"
+                >
+                  <app-icon theIcon="exam-Icon" width="80" height="80"></app-icon>
+                </div>
+
+                <!-- New Badge -->
+                <div class="absolute bottom-10 left-1/2 transform -translate-x-1/2">
+                  <span class="bg-blue-500 text-white text-xs font-bold px-3 py-1 rounded-full">
+                    {{
+                      exam.status === 'draft'
+                        ? 'Draft'
+                        : exam.status === 'published'
+                          ? 'Published'
+                          : 'Completed'
+                    }}
+                  </span>
+                </div>
+
+                <!-- Exam Title -->
+                <div class="text-center pt-2">
+                  <h3 class="font-semibold text-gray-800 text-sm mb-1">{{ exam.title }}</h3>
+                  <p class="text-xs text-gray-500">Exam</p>
+                </div>
+              </div>
+            }
+          </div>
+        }
       </div>
       <!-- Empty state -->
     </div>

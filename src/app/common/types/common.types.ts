@@ -153,3 +153,23 @@ export interface EmptyStateConfig {
   actionText?: string;
   actionUrl?: string;
 }
+
+// Exam-related interfaces
+export interface ExamFormData {
+  title: string;
+  description: string;
+  startDate: string;
+  startTime: string;
+  dueDate: string;
+  dueTime: string;
+  duration: string;
+  attempts: number;
+}
+
+export interface ExamDetails extends ExamFormData {
+  id: string;
+  createdAt: string;
+  status: 'draft' | 'published' | 'completed';
+  courseId: string;
+  courseTitle: string;
+}
