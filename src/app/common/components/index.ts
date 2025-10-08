@@ -7,6 +7,9 @@ export * from './badge/badge.component';
 export * from './badge-group/badge-group.component';
 export * from './modal/modal.component';
 
+// Custom Field Components
+export * from './custom-fields';
+
 // Export types
 export * from './side-nav/side-nav.types';
 export * from './breadcrumb/breadcrumb.types';

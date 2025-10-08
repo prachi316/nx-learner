@@ -1,7 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
-import { IconComponent, TabsComponent, ModalComponent } from '@nx-learner/components';
+import {
+  IconComponent,
+  TabsComponent,
+  ModalComponent,
+  DateInputComponent,
+  TimeInputComponent,
+  TextInputComponent,
+  TextareaInputComponent,
+} from '@nx-learner/components';
 import { TabItem, BadgeItem, CourseInfo, ProgressCard } from '@nx-learner/types';
 
 // Form interface for exam creation
@@ -26,7 +34,16 @@ import {
 
 @Component({
   selector: 'app-course-details',
-  imports: [IconComponent, TabsComponent, ModalComponent, ReactiveFormsModule],
+  imports: [
+    IconComponent,
+    TabsComponent,
+    ModalComponent,
+    ReactiveFormsModule,
+    DateInputComponent,
+    TimeInputComponent,
+    TextInputComponent,
+    TextareaInputComponent,
+  ],
   templateUrl: './course-details.component.html',
   standalone: true,
 })
