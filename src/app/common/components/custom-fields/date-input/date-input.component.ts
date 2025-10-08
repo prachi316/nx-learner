@@ -1,11 +1,34 @@
 import { Component, Input, forwardRef } from '@angular/core';
-import { ControlValueAccessor, NG_VALUE_ACCESSOR, FormControl } from '@angular/forms';
-import { IconComponent } from '../../icon/icon.component';
+import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
 @Component({
   selector: 'app-date-input',
   standalone: true,
-  imports: [IconComponent],
+  styles: [
+    `
+      /* Hide the default calendar picker indicator */
+      :host input[type='date']::-webkit-calendar-picker-indicator {
+        opacity: 0;
+        display: block;
+        position: absolute;
+        right: 0;
+        width: 100%;
+        height: 100%;
+        cursor: pointer;
+      }
+
+      /* Add a custom icon using a pseudo-element */
+      :host input[type='date']:before {
+        content: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="none" stroke="%236B7280" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M8 2v4M16 2v4M3 10h18M5 4h14a2 2 0 012 2v14a2 2 0 01-2 2H5a2 2 0 01-2-2V6a2 2 0 012-2z"/></svg>');
+        position: absolute;
+        right: 10px;
+        top: 50%;
+        transform: translateY(-50%);
+        pointer-events: none;
+        z-index: 1;
+      }
+    `,
+  ],
   template: `
     <div class="relative">
       <input
@@ -19,15 +42,6 @@ import { IconComponent } from '../../icon/icon.component';
         [class.border-red-500]="hasError"
         [class.border-gray-300]="!hasError"
       />
-      <div class="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none">
-        <app-icon
-          theIcon="calendar"
-          width="16"
-          height="16"
-          color="#6B7280"
-          class="text-gray-400"
-        ></app-icon>
-      </div>
     </div>
     @if (hasError && errorMessage) {
       <div class="text-red-500 text-sm mt-1">{{ errorMessage }}</div>
