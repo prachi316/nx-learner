@@ -1,25 +1,27 @@
 <!-- Course Details Page -->
 <div class="p-6 bg-stone-50 min-h-screen">
   <!-- Course Header -->
-  <div class="h-27 bg-[#F3F8FB] border border-gray-200 rounded-xl shadow-sm">
-    <div class="flex items-start gap-5">
+  <div class="bg-[#F3F8FB] border border-gray-200 rounded-xl shadow-sm p-5 sm:p-6">
+    <div class="flex items-start gap-4 sm:gap-6">
       <!-- Icon -->
       <div class="shrink-0">
         <img src="assets/Subject.svg" alt="User avatar" class="" />
       </div>
 
       <!-- Info -->
-      <div class="flex flex-col gap-2 flex-1 py-[0.875rem]">
+      <div class="flex-1">
         <!-- Title + Status -->
-        <h2 class="text-2xl font-extrabold">
-          {{ courseInfo.title }}
-        </h2>
-        <div>
+        <div class="mb-3">
+          <h2 class="text-xl sm:text-2xl font-semibold text-gray-900 leading-snug">
+            {{ courseInfo.title }}
+          </h2>
           <p class="text-sm sm:text-base text-gray-700 capitalize">
             {{ courseInfo.status }}
           </p>
+        </div>
 
-          <!-- Progress -->
+        <!-- Progress -->
+        <div class="mb-3">
           <div class="w-full h-3 rounded-full bg-gray-200/80">
             <div
               class="h-3 rounded-full bg-blue-500 transition-[width] duration-300 ease-out"
@@ -30,14 +32,14 @@
               aria-valuemax="100"
             ></div>
           </div>
-
-          <!-- Todos -->
-          <p class="text-xs sm:text-sm text-gray-600">
-            Todos:
-            <span class="font-medium">{{ courseInfo.todos.pending }}</span> pending,
-            <span class="font-medium">{{ courseInfo.todos.missed }}</span> missed
-          </p>
         </div>
+
+        <!-- Todos -->
+        <p class="text-xs sm:text-sm text-gray-600">
+          Todos:
+          <span class="font-medium">{{ courseInfo.todos.pending }}</span> pending,
+          <span class="font-medium">{{ courseInfo.todos.missed }}</span> missed
+        </p>
       </div>
     </div>
   </div>
