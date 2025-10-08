@@ -44,7 +44,7 @@
     </div>
   </div>
   <!-- Author and Level Pills -->
-  <div class="py-3">
+  <div class="py-6">
     <!-- Author Section -->
     <p class="font-sans font-extrabold text-sm leading-normal tracking-normal text-gray-900">
       by <span class="font-extrabold">Ahmed Al-Farouq</span>,
@@ -75,7 +75,7 @@
     <!-- Header: matches screenshot -->
     <div class="mb-6">
       <div class="space-y-2">
-        <h2 class="text-2xl sm:text-3xl font-extrabold text-gray-900">All topics</h2>
+        <h2 class="font-extrabold text-2xl leading-none">All topics</h2>
 
         <div class="flex items-center gap-2 text-slate-500">
           <span class="text-sm font-medium tracking-wide uppercase">
@@ -124,13 +124,13 @@
               </div>
             </div>
             <!-- Numerical Progress Pill -->
-            <div class="bg-amber-100 text-amber-800 px-3 py-1 rounded-full text-sm font-medium">
-              {{ card.completed }}/{{ card.total }}
+            <div class="px-3 py-1 gap-2 rounded-full bg-[#F2DFD8]">
+              <span class="font-semibold text-xs">{{ card.completed }}/{{ card.total }}</span>
             </div>
           </div>
           <!-- Progress Bar -->
           <div class="w-full bg-gray-200 rounded-full h-2">
-            <div class="bg-green-500 h-2 rounded-full" [style.width.%]="card.progress"></div>
+            <div class="bg-emerald-400 h-2 rounded-full" [style.width.%]="card.progress"></div>
           </div>
         </div>
       }
