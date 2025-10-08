@@ -238,19 +238,13 @@
     <div class="space-y-3">
       <!-- Online Exam Option -->
       <div
-        (click)="onOptionSelect('online-exam')"
-        class="w-full flex items-center p-4 rounded-xl border border-gray-200 hover:bg-gray-50 hover:border-gray-300 transition-colors cursor-pointer"
+        (click)="onOptionSelect('exam')"
+        class="w-full flex items-center py-6 px-[1.125rem] rounded-2xl border-4 border-gray-200 hover:bg-gray-50 hover:border-gray-300 transition-colors cursor-pointer"
       >
-        <div class="w-10 h-10 rounded-lg flex items-center justify-center mr-4 bg-purple-100">
-          <app-icon
-            theIcon="exam"
-            width="20"
-            height="20"
-            color="#8B5CF6"
-            class="text-purple-600"
-          ></app-icon>
+        <div class="flex items-center justify-center mr-3">
+          <app-icon theIcon="exam-Icon" width="32" height="32"></app-icon>
         </div>
-        <span class="text-gray-900 font-medium">Online exam</span>
+        <span class="text-black font-semibold">Online exam</span>
       </div>
     </div>
   </app-modal>
@@ -397,7 +391,7 @@
             <button
               type="button"
               (click)="examForm.patchValue({ attempts: attempt })"
-              class="px-4 py-2 rounded-full transition-colors"
+              class="px-4 py-2 rounded-xl border-2 border-dark-8/8 transition-colors"
               [class.bg-yellow-400]="getFormControl('attempts')?.value === attempt"
               [class.text-gray-900]="getFormControl('attempts')?.value === attempt"
               [class.bg-gray-100]="getFormControl('attempts')?.value !== attempt"
