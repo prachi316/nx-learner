@@ -26,7 +26,7 @@
     </div>
 
     <!-- School Card -->
-    <div class="bg-white rounded-lg p-3 mb-3 shadow-sm">
+    <div class="bg-surface-page-light rounded-lg p-3 mb-3">
       <div class="flex items-center space-x-2 mb-2">
         <div class="w-4 h-4 flex items-center justify-center">
           <app-icon theIcon="campus-Icon" width="16" height="16" color="#9CA3AF"></app-icon>
@@ -51,7 +51,7 @@
     </div>
 
     <!-- Semester Card -->
-    <div class="bg-white rounded-lg p-3 shadow-sm">
+    <div class="bg-surface-page-light rounded-lg p-3">
       <div class="text-xs text-gray-600 font-medium">
         {{ schoolInfo.semester }}
       </div>
@@ -63,7 +63,7 @@
     <nav class="space-y-2">
       @for (item of navItems; track item.id) {
         <a
-          class="flex items-center px-3 py-3 transition-colors relative rounded-lg"
+          class="group flex items-center px-3 py-3 transition-colors relative rounded-lg"
           [class.bg-yellow-200]="item.active"
           [class.text-gray-800]="item.active"
           [class.text-gray-700]="!item.active"
@@ -80,7 +80,16 @@
             [class.fill-current]="item.active"
           ></app-icon>
 
-          <span class="text-sm font-medium" [class.hidden]="isCollapsed">{{ item.label }}</span>
+          <span
+            class="font-sans font-normal text-base leading-6 tracking-normal group-hover:font-extrabold"
+            [class.hidden]="isCollapsed"
+            [class.font-extrabold]="item.active"
+            [class.text-base]="item.active"
+            [class.leading-6]="item.active"
+            [class.font-sans]="item.active"
+          >
+            {{ item.label }}
+          </span>
         </a>
       }
     </nav>
@@ -99,12 +108,10 @@
     </div>
 
     <!-- User Profile -->
-    <div class="bg-white border border-stone-200 rounded-xl p-3 shadow-sm">
+    <div class="p-3">
       <div class="flex items-center justify-between">
         <div class="flex items-center space-x-3">
-          <div class="w-8 h-8 rounded-full bg-yellow-100 flex items-center justify-center">
-            <app-icon theIcon="avatar" width="20" height="20" color="black"></app-icon>
-          </div>
+          <img src="assets/Avatar.svg" alt="User avatar" class="w-8 h-8" />
           <div>
             <div class="text-sm font-medium text-gray-800">{{ userInfo.name }}</div>
             <div class="text-[11px] leading-4 text-gray-600">{{ userInfo.role }}</div>
