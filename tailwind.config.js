@@ -8,6 +8,9 @@ module.exports = {
         'surface-page': '#F3F8FB',
         'surface-card': '#F4F1E7',
         'surface-page-light': '#FAFCFE',
+        'border-primary': '#f3f8fb',
+        'breadcrumb-primary': '#926f01',
+        'breadcrumb-secondary': '#6b7280',
       },
       fontFamily: {
         sans: [

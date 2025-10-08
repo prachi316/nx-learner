@@ -1,14 +1,13 @@
 <!-- Header -->
-<header class="bg-white border-b border-gray-200">
-  <!-- Top Navigation Bar (Dark Blue) -->
-  <div class="bg-blue-900 h-1"></div>
-
+<header class="border-b bg-white border-[var(--stroke-color-lowEmphasis,#f2f3f3)]">
   <!-- Main Header Content -->
-  <div class="px-6 py-6">
-    <div class="flex items-center justify-between">
-      <!-- Left side - Page Title and Breadcrumb -->
-      <div class="flex flex-col space-y-2">
-        <h1 class="text-3xl font-bold text-gray-900">{{ pageTitle }}</h1>
+  <div class="flex items-center justify-between py-6 px-8">
+    <!-- Left side - Page Title and Breadcrumb -->
+    <div class="flex flex-col py-2 gap-1">
+      <h1 class="font-sans font-semibold text-lg leading-6 tracking-normal text-[#131517]">
+        {{ pageTitle }}
+      </h1>
+      <div class="flex items-center py-2 gap-1">
         <app-breadcrumb [items]="breadcrumbItems"></app-breadcrumb>
       </div>
     </div>

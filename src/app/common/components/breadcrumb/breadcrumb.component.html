@@ -1,6 +1,6 @@
 <!-- Breadcrumb Navigation -->
 <nav class="flex" aria-label="Breadcrumb">
-  <ol class="flex items-center space-x-2">
+  <ol class="flex items-center space-x-2 font-normal text-sm leading-5 align-middle">
     @for (item of breadcrumbItems; track item.label; let last = $last) {
       <li class="flex items-center">
         <!-- Breadcrumb Item -->
@@ -9,7 +9,7 @@
           @if (item.label === 'Home' && !last) {
             <a
               [routerLink]="item.url"
-              class="text-gray-400 hover:text-gray-600 transition-colors"
+              class="text-gray-400 hover:text-[#926F01] transition-colors"
               [class.text-gray-600]="item.active"
             >
               <app-icon theIcon="home" width="16" height="16" color="currentColor"> </app-icon>
@@ -21,7 +21,7 @@
             @if (!item.active && item.url) {
               <a
                 [routerLink]="item.url"
-                class="text-amber-600 hover:text-amber-700 transition-colors text-sm font-medium"
+                class="text-[#926F01] hover:text-[#926F01] transition-colors text-sm font-medium"
               >
                 {{ item.label }}
               </a>
