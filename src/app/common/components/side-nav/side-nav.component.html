@@ -59,24 +59,29 @@
   </div>
 
   <!-- Navigation Links (scrollable) -->
-  <div class="flex-1 min-h-0 overflow-y-auto py-4 px-4">
-    <nav class="space-y-2">
+  <div class="flex-1 min-h-0 overflow-y-auto py-6 px-4" [class.px-0]="isCollapsed">
+    <nav class="space-y-8">
       @for (item of navItems; track item.id) {
         <a
-          class="group flex items-center px-3 py-3 transition-colors relative rounded-lg"
+          class="group flex items-center px-3 py-4 transition-colors relative rounded-lg"
+          [class.justify-center]="isCollapsed"
+          [class.w-full]="isCollapsed"
+          [class.px-0]="isCollapsed"
+          [class.rounded-none]="isCollapsed"
           [class.bg-yellow-200]="item.active"
           [class.text-gray-800]="item.active"
           [class.text-gray-700]="!item.active"
-          [class.hover:bg-white]="!item.active"
+          [class.hover:bg-surface-page-light]="!item.active && !isCollapsed"
           (click)="onNavItemClick(item)"
         >
           <!-- Icon -->
           <app-icon
             [theIcon]="item.icon"
-            width="20"
-            height="20"
+            width="24"
+            height="24"
             color="currentColor"
-            class="w-5 h-5 mr-3"
+            class="w-6 h-6 mr-4"
+            [class.mr-0]="isCollapsed"
             [class.fill-current]="item.active"
           ></app-icon>
 

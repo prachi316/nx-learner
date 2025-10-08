@@ -4,7 +4,11 @@ module.exports = {
   theme: {
     extend: {
       backgroundImage: {},
-      colors: {},
+      colors: {
+        'surface-page': '#F3F8FB',
+        'surface-card': '#F4F1E7',
+        'surface-page-light': '#FAFCFE',
+      },
       fontFamily: {
         sans: [
           'Inter',
