@@ -1,8 +1,10 @@
 <!-- Breadcrumb Navigation -->
 <nav class="flex" aria-label="Breadcrumb">
-  <ol class="flex items-center space-x-2 font-normal text-sm leading-5 align-middle">
+  <ol
+    class="flex items-center space-x-2 font-normal text-sm leading-5 align-middle list-none pl-0 m-0"
+  >
     @for (item of breadcrumbItems; track item.label; let last = $last; let first = $first) {
-      <li class="flex items-center">
+      <li class="flex items-center list-none m-0 p-0">
         <!-- Breadcrumb Item -->
         <div class="flex items-center">
           <!-- Regular breadcrumb item -->
