@@ -1,3 +1,9 @@
 /* You can add global styles to this file, and also import other style files */
 
 @use 'tailwindcss';
+
+@theme {
+  --color-surface-page: #f3f8fb;
+  --color-surface-card: #f4f1e7;
+  --color-surface-blue: #f3f8fb;
+}

@@ -17,6 +17,11 @@ export const routes: Routes = [
         canActivate: [],
         component: ExamDetailsComponent,
       },
+      {
+        path: '**',
+        pathMatch: 'full',
+        redirectTo: 'course-details',
+      },
     ],
   },
 ];
