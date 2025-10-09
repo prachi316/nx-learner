@@ -1,0 +1,216 @@
+<!doctype html>
+<html lang="en" data-beasties-container>
+  <head><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <meta charset="utf-8">
+    <title>NxLearner</title>
+    <base href="/nx-learner/">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <style>@font-face{font-family:'Inter';font-style:normal;font-weight:400;font-display:swap;src:url(https://fonts.gstatic.com/s/inter/v20/UcC73FwrK3iLTeHuS_nVMrMxCp50SjIa2JL7SUc.woff2) format('woff2');unicode-range:U+0460-052F, U+1C80-1C8A, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;}@font-face{font-family:'Inter';font-style:normal;font-weight:400;font-display:swap;src:url(https://fonts.gstatic.com/s/inter/v20/UcC73FwrK3iLTeHuS_nVMrMxCp50SjIa0ZL7SUc.woff2) format('woff2');unicode-range:U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;}@font-face{font-family:'Inter';font-style:normal;font-weight:400;font-display:swap;src:url(https://fonts.gstatic.com/s/inter/v20/UcC73FwrK3iLTeHuS_nVMrMxCp50SjIa2ZL7SUc.woff2) format('woff2');unicode-range:U+1F00-1FFF;}@font-face{font-family:'Inter';font-style:normal;font-weight:400;font-display:swap;src:url(https://fonts.gstatic.com/s/inter/v20/UcC73FwrK3iLTeHuS_nVMrMxCp50SjIa1pL7SUc.woff2) format('woff2');unicode-range:U+0370-0377, U+037A-037F, U+0384-038A, U+038C, U+038E-03A1, U+03A3-03FF;}@font-face{font-family:'Inter';font-style:normal;font-weight:400;font-display:swap;src:url(https://fonts.gstatic.com/s/inter/v20/UcC73FwrK3iLTeHuS_nVMrMxCp50SjIa2pL7SUc.woff2) format('woff2');unicode-range:U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+0300-0301, U+0303-0304, U+0308-0309, U+0323, U+0329, U+1EA0-1EF9, U+20AB;}@font-face{font-family:'Inter';font-style:normal;font-weight:400;font-display:swap;src:url(https://fonts.gstatic.com/s/inter/v20/UcC73FwrK3iLTeHuS_nVMrMxCp50SjIa25L7SUc.woff2) format('woff2');unicode-range:U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;}@font-face{font-family:'Inter';font-style:normal;font-weight:400;font-display:swap;src:url(https://fonts.gstatic.com/s/inter/v20/UcC73FwrK3iLTeHuS_nVMrMxCp50SjIa1ZL7.woff2) format('woff2');unicode-range:U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;}@font-face{font-family:'Inter';font-style:normal;font-weight:500;font-display:swap;src:url(https://fonts.gstatic.com/s/inter/v20/UcC73FwrK3iLTeHuS_nVMrMxCp50SjIa2JL7SUc.woff2) format('woff2');unicode-range:U+0460-052F, U+1C80-1C8A, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;}@font-face{font-family:'Inter';font-style:normal;font-weight:500;font-display:swap;src:url(https://fonts.gstatic.com/s/inter/v20/UcC73FwrK3iLTeHuS_nVMrMxCp50SjIa0ZL7SUc.woff2) format('woff2');unicode-range:U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;}@font-face{font-family:'Inter';font-style:normal;font-weight:500;font-display:swap;src:url(https://fonts.gstatic.com/s/inter/v20/UcC73FwrK3iLTeHuS_nVMrMxCp50SjIa2ZL7SUc.woff2) format('woff2');unicode-range:U+1F00-1FFF;}@font-face{font-family:'Inter';font-style:normal;font-weight:500;font-display:swap;src:url(https://fonts.gstatic.com/s/inter/v20/UcC73FwrK3iLTeHuS_nVMrMxCp50SjIa1pL7SUc.woff2) format('woff2');unicode-range:U+0370-0377, U+037A-037F, U+0384-038A, U+038C, U+038E-03A1, U+03A3-03FF;}@font-face{font-family:'Inter';font-style:normal;font-weight:500;font-display:swap;src:url(https://fonts.gstatic.com/s/inter/v20/UcC73FwrK3iLTeHuS_nVMrMxCp50SjIa2pL7SUc.woff2) format('woff2');unicode-range:U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+0300-0301, U+0303-0304, U+0308-0309, U+0323, U+0329, U+1EA0-1EF9, U+20AB;}@font-face{font-family:'Inter';font-style:normal;font-weight:500;font-display:swap;src:url(https://fonts.gstatic.com/s/inter/v20/UcC73FwrK3iLTeHuS_nVMrMxCp50SjIa25L7SUc.woff2) format('woff2');unicode-range:U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;}@font-face{font-family:'Inter';font-style:normal;font-weight:500;font-display:swap;src:url(https://fonts.gstatic.com/s/inter/v20/UcC73FwrK3iLTeHuS_nVMrMxCp50SjIa1ZL7.woff2) format('woff2');unicode-range:U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;}@font-face{font-family:'Inter';font-style:normal;font-weight:600;font-display:swap;src:url(https://fonts.gstatic.com/s/inter/v20/UcC73FwrK3iLTeHuS_nVMrMxCp50SjIa2JL7SUc.woff2) format('woff2');unicode-range:U+0460-052F, U+1C80-1C8A, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;}@font-face{font-family:'Inter';font-style:normal;font-weight:600;font-display:swap;src:url(https://fonts.gstatic.com/s/inter/v20/UcC73FwrK3iLTeHuS_nVMrMxCp50SjIa0ZL7SUc.woff2) format('woff2');unicode-range:U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;}@font-face{font-family:'Inter';font-style:normal;font-weight:600;font-display:swap;src:url(https://fonts.gstatic.com/s/inter/v20/UcC73FwrK3iLTeHuS_nVMrMxCp50SjIa2ZL7SUc.woff2) format('woff2');unicode-range:U+1F00-1FFF;}@font-face{font-family:'Inter';font-style:normal;font-weight:600;font-display:swap;src:url(https://fonts.gstatic.com/s/inter/v20/UcC73FwrK3iLTeHuS_nVMrMxCp50SjIa1pL7SUc.woff2) format('woff2');unicode-range:U+0370-0377, U+037A-037F, U+0384-038A, U+038C, U+038E-03A1, U+03A3-03FF;}@font-face{font-family:'Inter';font-style:normal;font-weight:600;font-display:swap;src:url(https://fonts.gstatic.com/s/inter/v20/UcC73FwrK3iLTeHuS_nVMrMxCp50SjIa2pL7SUc.woff2) format('woff2');unicode-range:U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+0300-0301, U+0303-0304, U+0308-0309, U+0323, U+0329, U+1EA0-1EF9, U+20AB;}@font-face{font-family:'Inter';font-style:normal;font-weight:600;font-display:swap;src:url(https://fonts.gstatic.com/s/inter/v20/UcC73FwrK3iLTeHuS_nVMrMxCp50SjIa25L7SUc.woff2) format('woff2');unicode-range:U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;}@font-face{font-family:'Inter';font-style:normal;font-weight:600;font-display:swap;src:url(https://fonts.gstatic.com/s/inter/v20/UcC73FwrK3iLTeHuS_nVMrMxCp50SjIa1ZL7.woff2) format('woff2');unicode-range:U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;}@font-face{font-family:'Inter';font-style:normal;font-weight:700;font-display:swap;src:url(https://fonts.gstatic.com/s/inter/v20/UcC73FwrK3iLTeHuS_nVMrMxCp50SjIa2JL7SUc.woff2) format('woff2');unicode-range:U+0460-052F, U+1C80-1C8A, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;}@font-face{font-family:'Inter';font-style:normal;font-weight:700;font-display:swap;src:url(https://fonts.gstatic.com/s/inter/v20/UcC73FwrK3iLTeHuS_nVMrMxCp50SjIa0ZL7SUc.woff2) format('woff2');unicode-range:U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;}@font-face{font-family:'Inter';font-style:normal;font-weight:700;font-display:swap;src:url(https://fonts.gstatic.com/s/inter/v20/UcC73FwrK3iLTeHuS_nVMrMxCp50SjIa2ZL7SUc.woff2) format('woff2');unicode-range:U+1F00-1FFF;}@font-face{font-family:'Inter';font-style:normal;font-weight:700;font-display:swap;src:url(https://fonts.gstatic.com/s/inter/v20/UcC73FwrK3iLTeHuS_nVMrMxCp50SjIa1pL7SUc.woff2) format('woff2');unicode-range:U+0370-0377, U+037A-037F, U+0384-038A, U+038C, U+038E-03A1, U+03A3-03FF;}@font-face{font-family:'Inter';font-style:normal;font-weight:700;font-display:swap;src:url(https://fonts.gstatic.com/s/inter/v20/UcC73FwrK3iLTeHuS_nVMrMxCp50SjIa2pL7SUc.woff2) format('woff2');unicode-range:U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+0300-0301, U+0303-0304, U+0308-0309, U+0323, U+0329, U+1EA0-1EF9, U+20AB;}@font-face{font-family:'Inter';font-style:normal;font-weight:700;font-display:swap;src:url(https://fonts.gstatic.com/s/inter/v20/UcC73FwrK3iLTeHuS_nVMrMxCp50SjIa25L7SUc.woff2) format('woff2');unicode-range:U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;}@font-face{font-family:'Inter';font-style:normal;font-weight:700;font-display:swap;src:url(https://fonts.gstatic.com/s/inter/v20/UcC73FwrK3iLTeHuS_nVMrMxCp50SjIa1ZL7.woff2) format('woff2');unicode-range:U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;}</style>
+    <svg xmlns="http://www.w3.org/2000/svg" style="display: none">
+      <!-- company logo Icon -->
+      <symbol id="company-logo" viewBox="0 0 44 24">
+        <path d="M41.0949 13.2015C44.0992 12.7049 44.4965 17.646 41.7652 18.0929C38.2146 18.664 38.5374 13.6236 41.0949 13.2015Z" fill="#48484B"/>
+        <path d="M35.5062 20.6333C35.0096 19.5408 31.012 14.5749 29.0505 13.7804C29.0753 13.7804 28.4546 15.2702 28.3801 15.4191C28.1566 15.9406 27.9083 16.4372 27.6352 16.9337C27.1386 17.8524 26.5924 18.7463 25.9468 19.5905C25.3012 20.4347 24.7301 21.0554 24.0101 21.6762C22.6941 22.8183 21.254 23.7122 19.516 23.9357C17.8027 24.1591 15.7915 23.8115 14.4011 22.719C13.83 22.2721 13.3582 21.6762 12.9858 21.0803C12.6878 20.5837 12.4395 20.0623 12.2657 19.516C12.0919 18.9946 11.9181 18.1752 11.9429 17.1075C11.9429 15.6426 11.9429 14.1528 11.9678 12.6879C11.9926 11.2229 11.347 10.2049 10.2545 9.53454C9.16203 8.86414 8.93857 8.96346 8.19368 8.98829C6.33147 9.06278 4.81687 10.6022 4.71755 12.4893V23.5881H-6.10352e-05V4.56863H4.71755V6.57983C5.23897 6.10806 6.03351 5.53699 7.12601 5.11488C7.97021 4.7921 8.78959 4.64312 9.53448 4.64312C14.2273 4.64312 15.4191 8.11926 15.717 8.81448C16.4867 10.5526 16.5364 12.4148 16.3874 14.277C16.2385 16.2633 15.866 18.8456 18.2248 19.6898C20.087 20.3602 21.9244 18.8456 23.0169 17.5048C24.5315 15.6178 25.7233 13.1845 26.0461 10.7512C26.0461 10.7512 22.719 7.27505 18.4483 7.37437L18.2993 4.44448C21.403 4.59346 24.3329 5.41284 26.8158 7.07642C27.4366 5.61147 27.2876 0 27.1138 0C27.1883 0 30.7141 0 30.7141 0C30.7141 0.0993181 30.7389 0.223467 30.7637 0.322785C30.863 1.16699 30.9127 2.08568 30.9127 2.97954C30.9375 5.16454 30.7637 7.3992 30.292 9.55937C33.5943 11.9678 36.8221 15.3943 37.567 16.7599C37.567 17.2069 36.2262 19.665 35.4565 20.6085L35.5062 20.6333Z" fill="#48484B"/>
+      </symbol>
+      <!-- campus Icon -->
+      <symbol id="campus-Icon" viewBox="0 0 16 16">
+        <path opacity="0.6" d="M6.74 2.66675C6.68667 2.86675 6.66668 3.08675 6.66668 3.33341V5.33341H3.33334V4.00008C3.33334 3.26675 3.93334 2.66675 4.66668 2.66675H6.74Z" fill="#EE8F66"/>
+        <path d="M6.66668 12.6666V5.33325H3.33334C2.00001 5.33325 1.33334 5.99992 1.33334 7.33325V12.6666C1.33334 13.9999 2.00001 14.6666 3.33334 14.6666H8.66668C7.33334 14.6666 6.66668 13.9999 6.66668 12.6666ZM4.50001 11.3333C4.50001 11.6066 4.27334 11.8333 4.00001 11.8333C3.72668 11.8333 3.50001 11.6066 3.50001 11.3333V8.66659C3.50001 8.39325 3.72668 8.16659 4.00001 8.16659C4.27334 8.16659 4.50001 8.39325 4.50001 8.66659V11.3333Z" fill="#EE8F66"/>
+        <path opacity="0.4" d="M9.33332 14.6666H8.66666C7.33332 14.6666 6.66666 13.9999 6.66666 12.6666V3.33325C6.66666 1.99992 7.33332 1.33325 8.66666 1.33325H12.6667C14 1.33325 14.6667 1.99992 14.6667 3.33325V12.6666C14.6667 13.9999 14 14.6666 12.6667 14.6666H12" fill="#EE8F66"/>
+        <path d="M12 11.9999V14.6666H9.33334V11.9999C9.33334 11.6333 9.63334 11.3333 10 11.3333H11.3333C11.7 11.3333 12 11.6333 12 11.9999Z" fill="#EE8F66"/>
+        <path d="M9.33334 9.16659C9.06001 9.16659 8.83334 8.93992 8.83334 8.66659V5.33325C8.83334 5.05992 9.06001 4.83325 9.33334 4.83325C9.60668 4.83325 9.83334 5.05992 9.83334 5.33325V8.66659C9.83334 8.93992 9.60668 9.16659 9.33334 9.16659Z" fill="#EE8F66"/>
+        <path d="M12 9.16659C11.7267 9.16659 11.5 8.93992 11.5 8.66659V5.33325C11.5 5.05992 11.7267 4.83325 12 4.83325C12.2733 4.83325 12.5 5.05992 12.5 5.33325V8.66659C12.5 8.93992 12.2733 9.16659 12 9.16659Z" fill="#EE8F66"/>
+      </symbol>
+      <!-- ranking Icon -->
+      <symbol id="ranking-Icon" viewBox="0 0 16 16">
+        <path opacity="0.4" d="M5.78001 9.33325H2.66668C1.93334 9.33325 1.33334 9.93325 1.33334 10.6666V14.6666H5.78001V9.33325Z" fill="#EE8F66"/>
+        <path d="M8.88668 6.66675H7.10668C6.37335 6.66675 5.77335 7.26675 5.77335 8.00008V14.6667H10.22V8.00008C10.22 7.26675 9.62668 6.66675 8.88668 6.66675Z" fill="#EE8F66"/>
+        <path opacity="0.4" d="M13.3333 11.3333H10.22V14.6666H14.6666V12.6666C14.6666 11.9333 14.0666 11.3333 13.3333 11.3333Z" fill="#EE8F66"/>
+        <path d="M10.0067 3.23325C10.2134 3.02658 10.2934 2.77991 10.2267 2.56658C10.16 2.35325 9.95338 2.19992 9.66005 2.15325L9.02004 2.04658C8.99338 2.03991 8.93338 1.9999 8.92004 1.97324L8.56671 1.26657C8.30004 0.726572 7.69338 0.726572 7.42671 1.26657L7.07338 1.97324C7.06004 1.9999 7.00004 2.03991 6.97338 2.04658L6.33338 2.15325C6.04004 2.19992 5.84005 2.35325 5.76671 2.56658C5.70005 2.77991 5.78004 3.02658 5.98671 3.23325L6.48004 3.73325C6.50004 3.75325 6.52671 3.83325 6.52004 3.85992L6.38004 4.47324C6.27338 4.92657 6.44671 5.13323 6.56004 5.2199C6.67338 5.2999 6.92005 5.40658 7.32671 5.16658L7.92671 4.81324C7.95338 4.79324 8.04004 4.79324 8.06671 4.81324L8.66671 5.16658C8.85338 5.27991 9.00671 5.31324 9.12671 5.31324C9.26671 5.31324 9.36671 5.2599 9.42671 5.2199C9.54004 5.1399 9.71338 4.93324 9.60671 4.47324L9.46671 3.85992C9.46004 3.82658 9.48004 3.75325 9.50671 3.73325L10.0067 3.23325Z" fill="#EE8F66"/>
+      </symbol>
+
+      <!-- video Icon -->
+      <symbol id="video-Icon" viewBox="0 0 32 32">
+        <path xmlns="http://www.w3.org/2000/svg" d="M19.764 15.6107C19.8336 15.6487 19.8914 15.7052 19.9311 15.7738C19.9709 15.8425 19.991 15.9207 19.9893 16C19.9934 16.0677 19.9809 16.1353 19.953 16.1971C19.9252 16.2588 19.8827 16.3129 19.8293 16.3547L12.6667 19.9387C12.5985 19.9764 12.5216 19.9957 12.4437 19.9947C12.3657 19.9937 12.2894 19.9725 12.2221 19.9331C12.1549 19.8937 12.0991 19.8374 12.0601 19.7699C12.0212 19.7024 12.0005 19.6259 12 19.548V12.452C11.9985 12.3729 12.0185 12.2949 12.058 12.2263C12.0975 12.1577 12.1548 12.1011 12.224 12.0627C12.2877 12.026 12.3598 12.0066 12.4333 12.0067C12.5408 12.0098 12.6457 12.0411 12.7373 12.0973L19.764 15.6107ZM32 6.66667V25.3333C31.9979 27.1008 31.2948 28.7953 30.045 30.045C28.7953 31.2948 27.1008 31.9979 25.3333 32H6.66667C4.89921 31.9979 3.20474 31.2948 1.95496 30.045C0.705176 28.7953 0.00211714 27.1008 0 25.3333L0 6.66667C0.00211714 4.89921 0.705176 3.20474 1.95496 1.95496C3.20474 0.705176 4.89921 0.00211714 6.66667 0L25.3333 0C27.1008 0.00211714 28.7953 0.705176 30.045 1.95496C31.2948 3.20474 31.9979 4.89921 32 6.66667ZM22.656 16C22.6565 15.4382 22.5047 14.8868 22.2169 14.4043C21.9291 13.9219 21.5159 13.5264 21.0213 13.26L13.984 9.74667C13.51 9.47472 12.9728 9.3322 12.4263 9.33343C11.8799 9.33466 11.3433 9.47958 10.8706 9.75365C10.3978 10.0277 10.0054 10.4213 9.73278 10.8949C9.46015 11.3685 9.31688 11.9055 9.31733 12.452V19.548C9.31413 20.0944 9.45615 20.6318 9.72884 21.1053C10.0015 21.5787 10.3951 21.9713 10.8693 22.2427C11.3493 22.5229 11.8948 22.6715 12.4507 22.6733C12.9649 22.6757 13.4707 22.5428 13.9173 22.288L21.0853 18.7053C21.5646 18.4354 21.963 18.0423 22.2391 17.5666C22.5153 17.0909 22.6592 16.55 22.656 16Z" fill="#9D67F5"/>
+      </symbol>
+
+      <!-- assignment Icon -->
+      <symbol id="assignment-Icon" viewBox="0 0 32 32">
+        <path xmlns="http://www.w3.org/2000/svg" d="M21.3333 9.33333C20.6261 9.33333 19.9478 9.05238 19.4477 8.55229C18.9476 8.05219 18.6667 7.37391 18.6667 6.66667V0H10.6667C8.89921 0.00211714 7.20474 0.705176 5.95496 1.95496C4.70518 3.20474 4.00212 4.89921 4 6.66667V25.3333C4.00212 27.1008 4.70518 28.7953 5.95496 30.045C7.20474 31.2948 8.89921 31.9979 10.6667 32H21.3333C23.1008 31.9979 24.7953 31.2948 26.045 30.045C27.2948 28.7953 27.9979 27.1008 28 25.3333V9.33333H21.3333ZM15.6147 26.2667L13.4667 28.452C12.903 29.0146 12.1391 29.3306 11.3427 29.3306C10.5462 29.3306 9.78236 29.0146 9.21867 28.452L8.37733 27.6C8.13503 27.3457 8.00289 27.006 8.00963 26.6547C8.01637 26.3035 8.16145 25.9691 8.41334 25.7243C8.66523 25.4794 9.00357 25.3438 9.35484 25.347C9.70612 25.3502 10.0419 25.4919 10.2893 25.7413L11.1107 26.5853C11.174 26.6427 11.257 26.6735 11.3424 26.6713C11.4278 26.6691 11.5091 26.634 11.5693 26.5733L13.7187 24.4C13.8378 24.2616 13.9841 24.1491 14.1484 24.0696C14.3128 23.99 14.4918 23.9451 14.6742 23.9375C14.8567 23.93 15.0388 23.96 15.2091 24.0258C15.3795 24.0915 15.5346 24.1915 15.6647 24.3196C15.7948 24.4477 15.8973 24.6012 15.9656 24.7705C16.034 24.9399 16.0669 25.1214 16.0622 25.304C16.0575 25.4866 16.0153 25.6662 15.9384 25.8318C15.8614 25.9974 15.7512 26.1454 15.6147 26.2667ZM22.6667 28H20C19.6464 28 19.3072 27.8595 19.0572 27.6095C18.8071 27.3594 18.6667 27.0203 18.6667 26.6667C18.6667 26.313 18.8071 25.9739 19.0572 25.7239C19.3072 25.4738 19.6464 25.3333 20 25.3333H22.6667C23.0203 25.3333 23.3594 25.4738 23.6095 25.7239C23.8595 25.9739 24 26.313 24 26.6667C24 27.0203 23.8595 27.3594 23.6095 27.6095C23.3594 27.8595 23.0203 28 22.6667 28ZM27.6 6.66667H21.3333V0.4C22.2744 0.722637 23.1307 1.2531 23.8387 1.952L26.0467 4.16267C26.7464 4.86972 27.2774 5.72568 27.6 6.66667Z" fill="#62BA0A"/>
+      </symbol>
+
+      <!-- attachment Icon -->
+      <symbol id="attachment-Icon" viewBox="0 0 32 32">
+        <path xmlns="http://www.w3.org/2000/svg" d="M23.2897 0.0626667C23.7283 0.836 24.0003 1.716 24.0003 2.66667V13.8347C24.0003 15.3907 23.015 16.8613 21.503 17.232C19.3057 17.7707 17.3337 16.1107 17.3337 14.0013V4C17.3337 3.264 17.931 2.66667 18.667 2.66667C19.403 2.66667 20.0003 3.264 20.0003 4V14C20.0003 14.368 20.299 14.6667 20.667 14.6667C21.035 14.6667 21.3337 14.368 21.3337 14V2.78533C21.3337 1.62133 20.651 0.496 19.5417 0.14C17.7017 -0.450667 16.0003 0.912 16.0003 2.66667V12C16.0003 12.736 15.403 13.3333 14.667 13.3333C13.931 13.3333 13.3337 12.736 13.3337 12V2.66667C13.3337 1.69067 13.6163 0.788 14.075 0H9.33366C5.65233 0 2.66699 2.98533 2.66699 6.66667V25.3333C2.66699 29.0147 5.65233 32 9.33366 32H22.667C26.3483 32 29.3337 29.0147 29.3337 25.3333V6.66667C29.3337 3.19867 26.675 0.381333 23.2897 0.0626667ZM9.33366 17.3333H14.667C15.403 17.3333 16.0003 17.9307 16.0003 18.6667C16.0003 19.4027 15.403 20 14.667 20H9.33366C8.59766 20 8.00033 19.4027 8.00033 18.6667C8.00033 17.9307 8.59766 17.3333 9.33366 17.3333ZM22.667 25.3333H9.33366C8.59766 25.3333 8.00033 24.736 8.00033 24C8.00033 23.264 8.59766 22.6667 9.33366 22.6667H22.667C23.403 22.6667 24.0003 23.264 24.0003 24C24.0003 24.736 23.403 25.3333 22.667 25.3333Z" fill="#F7663E"/>
+      </symbol>
+
+      <!-- exam Icon -->
+      <symbol id="exam-Icon" viewBox="0 0 32 32">
+        <path xmlns="http://www.w3.org/2000/svg" d="M8 0C3.58133 0 0 3.58133 0 8C0 12.4187 3.58133 16 8 16C12.4187 16 16 12.4187 16 8C16 3.58133 12.4187 0 8 0ZM12.9227 7.62933L9.30667 11.1027C8.704 11.6973 7.904 11.9973 7.10267 11.9973C6.30133 11.9973 5.49733 11.6973 4.884 11.0987L3.37467 9.62133C2.848 9.10533 2.84 8.26133 3.35467 7.736C3.86933 7.20933 4.71333 7.20133 5.24 7.71467L6.74933 9.192C6.94133 9.38133 7.25467 9.38 7.44533 9.192L11.076 5.70667C11.6067 5.19867 12.452 5.21333 12.9613 5.74533C13.472 6.276 13.4547 7.11867 12.9227 7.62933ZM17.692 20.6413C16.608 21.7253 15.9987 23.1947 15.9987 24.728V26.668H17.9387C19.472 26.668 20.9413 26.0587 22.0253 24.9747L31.1013 15.8987C32.2973 14.7027 32.2973 12.7613 31.1013 11.5653C29.9053 10.3693 27.964 10.3693 26.768 11.5653L17.692 20.6413ZM27.9987 22.772V26.668C27.9987 29.6133 25.6107 32.0013 22.6653 32.0013H9.33333C6.388 32.0013 4 29.6133 4 26.668V17.8827C5.236 18.3853 6.58533 18.668 8 18.668C13.8813 18.668 18.6667 13.8827 18.6667 8.00133C18.6667 7.54933 18.6293 7.10533 18.5747 6.668H22.6667C24.2573 6.668 25.672 7.38267 26.6493 8.49067C26.0093 8.76933 25.4053 9.15733 24.8827 9.68L15.8053 18.7573C14.2227 20.3413 13.332 22.488 13.332 24.728V26.668C13.332 28.1413 14.5253 29.3347 15.9987 29.3347H17.9387C20.1773 29.3347 22.3253 28.4453 23.9093 26.8613L27.9987 22.772Z" fill="#E654F0"/>
+      </symbol>
+      <!-- Edit Icon -->
+      <symbol id="edit" viewBox="0 0 20 20">
+        <path d="M4.52988 13.2188C4.56504 13.2188 4.6002 13.2152 4.63535 13.21L7.59199 12.6914C7.62715 12.6844 7.66055 12.6686 7.68516 12.6422L15.1365 5.19082C15.1528 5.17456 15.1657 5.15524 15.1746 5.13398C15.1834 5.11271 15.1879 5.08992 15.1879 5.06689C15.1879 5.04387 15.1834 5.02108 15.1746 4.99981C15.1657 4.97855 15.1528 4.95923 15.1365 4.94297L12.215 2.01973C12.1816 1.98633 12.1377 1.96875 12.0902 1.96875C12.0428 1.96875 11.9988 1.98633 11.9654 2.01973L4.51406 9.47109C4.4877 9.49746 4.47187 9.5291 4.46484 9.56426L3.94629 12.5209C3.92919 12.6151 3.9353 12.712 3.96409 12.8033C3.99288 12.8945 4.04349 12.9774 4.11152 13.0447C4.22754 13.1572 4.37344 13.2188 4.52988 13.2188ZM5.71465 10.1531L12.0902 3.7793L13.3787 5.06777L7.00312 11.4416L5.44043 11.7176L5.71465 10.1531ZM15.4688 14.6953H2.53125C2.22012 14.6953 1.96875 14.9467 1.96875 15.2578V15.8906C1.96875 15.968 2.03203 16.0312 2.10938 16.0312H15.8906C15.968 16.0312 16.0312 15.968 16.0312 15.8906V15.2578C16.0312 14.9467 15.7799 14.6953 15.4688 14.6953Z" fill="currentColor"/>
+      </symbol>
+
+      <!-- Home Icon -->
+      <symbol id="home" viewBox="0 0 24 24">
+        <path d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+      </symbol>
+
+      <!-- Chevron Right Icon -->
+      <symbol id="chevron-right" viewBox="0 0 24 24">
+        <path d="M9 5l7 7-7 7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+      </symbol>
+
+      <!-- User Icon -->
+      <symbol id="user" viewBox="0 0 24 24">
+        <path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        <circle cx="12" cy="7" r="4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+      </symbol>
+
+      <!-- Settings Icon -->
+      <symbol id="settings" viewBox="0 0 24 24">
+        <circle cx="12" cy="12" r="3" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 010 2.83 2 2 0 01-2.83 0l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-2 2 2 2 0 01-2-2v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83 0 2 2 0 010-2.83l.06-.06a1.65 1.65 0 00.33-1.82 1.65 1.65 0 00-1.51-1H3a2 2 0 01-2-2 2 2 0 012-2h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 010-2.83 2 2 0 012.83 0l.06.06a1.65 1.65 0 001.82.33H9a1.65 1.65 0 001-1.51V3a2 2 0 012-2 2 2 0 012 2v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 0 2 2 0 010 2.83l-.06.06a1.65 1.65 0 00-.33 1.82V9a1.65 1.65 0 001.51 1H21a2 2 0 012 2 2 2 0 01-2 2h-.09a1.65 1.65 0 00-1.51 1z" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+      </symbol>
+
+      <!-- Search Icon -->
+      <symbol id="search" viewBox="0 0 24 24">
+        <circle cx="11" cy="11" r="8" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M21 21l-4.35-4.35" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+      </symbol>
+
+      <!-- Bell Icon -->
+      <symbol id="bell" viewBox="0 0 24 24">
+        <path d="M18 8A6 6 0 006 8c0 7-3 9-3 9h18s-3-2-3-9" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M13.73 21a2 2 0 01-3.46 0" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+      </symbol>
+
+      <!-- Check Icon -->
+      <symbol id="check" viewBox="0 0 20 20">
+        <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+      </symbol>
+
+      <!-- Chevron Left Icon -->
+      <symbol id="chevron-left" viewBox="0 0 24 24">
+        <path d="M15 19l-7-7 7-7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+      </symbol>
+
+      <!-- Video Icon -->
+      <symbol id="video" viewBox="0 0 20 20">
+        <path d="M2 6a2 2 0 012-2h6a2 2 0 012 2v8a2 2 0 01-2 2H4a2 2 0 01-2-2V6zM14.553 7.106A1 1 0 0014 8v4a1 1 0 00.553.894l2 1A1 1 0 0018 13V7a1 1 0 00-1.447-.894l-2 1z"/>
+      </symbol>
+
+      <!-- Attachment Icon -->
+      <symbol id="attachment" viewBox="0 0 20 20">
+        <path fill-rule="evenodd" d="M3 17a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm3.293-7.707a1 1 0 011.414 0L9 10.586V3a1 1 0 112 0v7.586l1.293-1.293a1 1 0 111.414 1.414l-3 3a1 1 0 01-1.414 0l-3-3a1 1 0 010-1.414z" clip-rule="evenodd"/>
+      </symbol>
+
+      <!-- Assignment Icon -->
+      <symbol id="assignment" viewBox="0 0 20 20">
+        <path fill-rule="evenodd" d="M4 4a2 2 0 00-2 2v8a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2H4zm3 6a1 1 0 000 2h6a1 1 0 100-2H7z" clip-rule="evenodd"/>
+      </symbol>
+
+      <!-- Exam Icon -->
+      <symbol id="exam" viewBox="0 0 20 20">
+        <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"/>
+      </symbol>
+
+      <!-- Hamburger Menu Icon -->
+      <symbol id="menu" viewBox="0 0 24 24">
+        <path d="M4 6h16M4 12h16M4 18h16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+      </symbol>
+
+      <!-- Building Icon -->
+      <symbol id="building" viewBox="0 0 20 20">
+        <path d="M10.707 2.293a1 1 0 00-1.414 0l-7 7a1 1 0 001.414 1.414L4 10.414V17a1 1 0 001 1h2a1 1 0 001-1v-2a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 001 1h2a1 1 0 001-1v-6.586l.293.293a1 1 0 001.414-1.414l-7-7z"/>
+      </symbol>
+
+      <!-- Check Circle Icon -->
+      <symbol id="check-circle" viewBox="0 0 20 20">
+        <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+      </symbol>
+
+      <!-- Truck Icon -->
+      <symbol id="truck" viewBox="0 0 24 24">
+        <path d="M1 3h15v13H1zM16 8h4l3 3v5h-7V8zM5.5 21a2.5 2.5 0 100-5 2.5 2.5 0 000 5zM18.5 21a2.5 2.5 0 100-5 2.5 2.5 0 000 5z" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+      </symbol>
+
+      <!-- Chat Icon -->
+      <symbol id="chat" viewBox="0 0 24 24">
+        <path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+      </symbol>
+
+      <!-- Book Icon -->
+      <symbol id="book" viewBox="0 0 20 20">
+        <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+      </symbol>
+
+      <!-- Books Icon -->
+      <symbol id="books" viewBox="0 0 24 24">
+        <path d="M4 19.5A2.5 2.5 0 016.5 17H20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M6.5 2H20v20H6.5A2.5 2.5 0 014 19.5v-15A2.5 2.5 0 016.5 2z" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+      </symbol>
+
+      <!-- Video Camera Icon -->
+      <symbol id="video-camera" viewBox="0 0 24 24">
+        <path d="M23 7l-7 5 7 5V7z" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        <rect x="1" y="5" width="15" height="10" rx="2" ry="2" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+      </symbol>
+
+      <!-- Document Icon -->
+      <symbol id="document" viewBox="0 0 24 24">
+        <path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        <polyline points="14,2 14,8 20,8" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        <line x1="16" y1="13" x2="8" y2="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        <line x1="16" y1="17" x2="8" y2="17" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        <polyline points="10,9 9,9 8,9" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+      </symbol>
+
+      <!-- Chevron Down Icon -->
+      <symbol id="chevron-down" viewBox="0 0 24 24">
+        <path d="M19 9l-7 7-7-7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+      </symbol>
+
+      <!-- Empty State Icon -->
+      <symbol id="empty-state" viewBox="0 0 24 24">
+        <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+      </symbol>
+
+      <!-- Star Icon -->
+      <symbol id="star" viewBox="0 0 20 20">
+        <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/>
+      </symbol>
+
+      <!-- X Icon -->
+      <symbol id="x" viewBox="0 0 24 24">
+        <path d="M18 6L6 18M6 6l12 12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+      </symbol>
+
+      <!-- Play Icon -->
+      <symbol id="play" viewBox="0 0 24 24">
+        <path d="M8 5v14l11-7z" fill="currentColor"/>
+      </symbol>
+
+      <!-- Paperclip Icon -->
+      <symbol id="paperclip" viewBox="0 0 24 24">
+        <path d="M21.44 11.05l-9.19 9.19a6 6 0 01-8.49-8.49l9.19-9.19a4 4 0 015.66 5.66L9.64 16.2a2 2 0 01-2.83-2.83l8.49-8.49" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+      </symbol>
+
+      <!-- Calendar Icon -->
+      <symbol id="calendar" viewBox="0 0 24 24">
+        <path d="M8 2v4M16 2v4M3 10h18M5 4h14a2 2 0 012 2v14a2 2 0 01-2 2H5a2 2 0 01-2-2V6a2 2 0 012-2z" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+      </symbol>
+
+      <!-- Clock Icon -->
+      <symbol id="clock" viewBox="0 0 24 24">
+        <path d="M16.1094 9C16.1094 7.11448 15.3604 5.30618 14.0271 3.97291C12.6938 2.63965 10.8855 1.89062 9 1.89062C7.11448 1.89062 5.30618 2.63965 3.97291 3.97291C2.63965 5.30618 1.89062 7.11448 1.89062 9C1.89062 10.8855 2.63965 12.6938 3.97291 14.0271C5.30618 15.3604 7.11448 16.1094 9 16.1094C10.8855 16.1094 12.6938 15.3604 14.0271 14.0271C15.3604 12.6938 16.1094 10.8855 16.1094 9ZM0.25 9C0.25 6.67936 1.17187 4.45376 2.81282 2.81282C4.45376 1.17187 6.67936 0.25 9 0.25C11.3206 0.25 13.5462 1.17187 15.1872 2.81282C16.8281 4.45376 17.75 6.67936 17.75 9C17.75 11.3206 16.8281 13.5462 15.1872 15.1872C13.5462 16.8281 11.3206 17.75 9 17.75C6.67936 17.75 4.45376 16.8281 2.81282 15.1872C1.17187 13.5462 0.25 11.3206 0.25 9ZM9.82031 4.35156V9C9.82031 9.27344 9.68359 9.52979 9.45459 9.68359L6.17334 11.8711C5.79736 12.124 5.28809 12.0215 5.03516 11.6421C4.78223 11.2627 4.88477 10.7568 5.26416 10.5039L8.17969 8.5625V4.35156C8.17969 3.89697 8.54541 3.53125 9 3.53125C9.45459 3.53125 9.82031 3.89697 9.82031 4.35156Z" fill="#808489"/>
+      </symbol>
+    </svg>
+  <style>@layer properties;@layer theme,base,components,utilities;@layer theme{:root{--font-sans:ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";--font-mono:ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;--color-red-100:oklch(93.6% .032 17.717);--color-red-200:oklch(88.5% .062 18.334);--color-red-300:oklch(80.8% .114 19.571);--color-red-500:oklch(63.7% .237 25.331);--color-red-600:oklch(57.7% .245 27.325);--color-red-800:oklch(44.4% .177 26.899);--color-yellow-50:oklch(98.7% .026 102.212);--color-yellow-100:oklch(97.3% .071 103.193);--color-yellow-200:oklch(94.5% .129 101.54);--color-yellow-300:oklch(90.5% .182 98.111);--color-yellow-400:oklch(85.2% .199 91.936);--color-yellow-500:oklch(79.5% .184 86.047);--color-yellow-600:oklch(68.1% .162 75.834);--color-yellow-800:oklch(47.6% .114 61.907);--color-green-100:oklch(96.2% .044 156.743);--color-green-200:oklch(92.5% .084 155.995);--color-green-300:oklch(87.1% .15 154.449);--color-green-600:oklch(62.7% .194 149.214);--color-green-800:oklch(44.8% .119 151.328);--color-emerald-400:oklch(76.5% .177 163.223);--color-blue-100:oklch(93.2% .032 255.585);--color-blue-200:oklch(88.2% .059 254.128);--color-blue-300:oklch(80.9% .105 251.813);--color-blue-500:oklch(62.3% .214 259.815);--color-blue-600:oklch(54.6% .245 262.881);--color-blue-800:oklch(42.4% .199 265.638);--color-indigo-100:oklch(93% .034 272.788);--color-indigo-200:oklch(87% .065 274.039);--color-indigo-300:oklch(78.5% .115 274.713);--color-indigo-800:oklch(39.8% .195 277.366);--color-violet-500:oklch(60.6% .25 292.717);--color-purple-100:oklch(94.6% .033 307.174);--color-purple-200:oklch(90.2% .063 306.703);--color-purple-300:oklch(82.7% .119 306.383);--color-purple-600:oklch(55.8% .288 302.321);--color-purple-700:oklch(49.6% .265 301.924);--color-purple-800:oklch(43.8% .218 303.724);--color-pink-100:oklch(94.8% .028 342.258);--color-pink-200:oklch(89.9% .061 343.231);--color-pink-300:oklch(82.3% .12 346.018);--color-pink-800:oklch(45.9% .187 3.815);--color-slate-500:oklch(55.4% .046 257.417);--color-gray-50:oklch(98.5% .002 247.839);--color-gray-100:oklch(96.7% .003 264.542);--color-gray-200:oklch(92.8% .006 264.531);--color-gray-300:oklch(87.2% .01 258.338);--color-gray-400:oklch(70.7% .022 261.325);--color-gray-500:oklch(55.1% .027 264.364);--color-gray-600:oklch(44.6% .03 256.802);--color-gray-700:oklch(37.3% .034 259.733);--color-gray-800:oklch(27.8% .033 256.848);--color-gray-900:oklch(21% .034 264.665);--color-stone-50:oklch(98.5% .001 106.423);--color-stone-300:oklch(86.9% .005 56.366);--color-black:#000;--color-white:#fff;--spacing:.25rem;--container-sm:24rem;--container-md:28rem;--container-lg:32rem;--container-xl:36rem;--container-2xl:42rem;--container-4xl:56rem;--container-5xl:64rem;--text-xs:.75rem;--text-xs--line-height:calc(1 / .75);--text-sm:.875rem;--text-sm--line-height:calc(1.25 / .875);--text-base:1rem;--text-base--line-height:1.5 ;--text-lg:1.125rem;--text-lg--line-height:calc(1.75 / 1.125);--text-xl:1.25rem;--text-xl--line-height:calc(1.75 / 1.25);--text-2xl:1.5rem;--text-2xl--line-height:calc(2 / 1.5);--font-weight-normal:400;--font-weight-medium:500;--font-weight-semibold:600;--font-weight-bold:700;--font-weight-extrabold:800;--tracking-normal:0em;--tracking-wide:.025em;--tracking-wider:.05em;--leading-snug:1.375;--leading-normal:1.5;--leading-relaxed:1.625;--radius-md:.375rem;--radius-lg:.5rem;--radius-xl:.75rem;--radius-2xl:1rem;--radius-3xl:1.5rem;--radius-4xl:2rem;--ease-out:cubic-bezier(0, 0, .2, 1);--ease-in-out:cubic-bezier(.4, 0, .2, 1);--default-transition-duration:.15s;--default-transition-timing-function:cubic-bezier(.4, 0, .2, 1);--default-font-family:var(--font-sans);--default-mono-font-family:var(--font-mono)}}@layer base{*,:after,:before{box-sizing:border-box;margin:0;padding:0;border:0 solid}html{line-height:1.5;-webkit-text-size-adjust:100%;tab-size:4;font-family:var(--default-font-family, ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji");font-feature-settings:var(--default-font-feature-settings, normal);font-variation-settings:var(--default-font-variation-settings, normal);-webkit-tap-highlight-color:transparent}svg{display:block;vertical-align:middle}}@layer utilities{.font-sans{font-family:var(--font-sans)}.text-gray-800{color:var(--color-gray-800)}}:root{--color-surface-page:#f3f8fb;--color-surface-card:#f4f1e7;--color-surface-blue:#f3f8fb;--color-surface-page-light:#faf8f3;--color-emerald-400:#5ef094;--color-border-primary:#f3f8fb;--color-breadcrumb-primary:#926f01;--color-breadcrumb-secondary:#6b7280;--color-dark-8:#131517;--color-warm-gray:#eeece7;--font-family-sans:"Inter", ui-sans-serif, system-ui, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";--font-size-xs:12px;--font-size-sm:14px;--font-size-base:16px;--font-size-lg:18px;--font-size-xl:20px;--font-size-2xl:24px;--font-size-3xl:30px;--font-size-4xl:36px;--font-size-5xl:48px;--line-height-xs:18px;--line-height-sm:20px;--line-height-base:24px;--line-height-lg:28px;--line-height-xl:28px;--line-height-2xl:32px;--line-height-3xl:36px;--line-height-4xl:40px;--line-height-5xl:1}@property --tw-translate-x{syntax:"*";inherits:false;initial-value:0;}@property --tw-translate-y{syntax:"*";inherits:false;initial-value:0;}@property --tw-translate-z{syntax:"*";inherits:false;initial-value:0;}@property --tw-rotate-x{syntax:"*";inherits:false;}@property --tw-rotate-y{syntax:"*";inherits:false;}@property --tw-rotate-z{syntax:"*";inherits:false;}@property --tw-skew-x{syntax:"*";inherits:false;}@property --tw-skew-y{syntax:"*";inherits:false;}@property --tw-space-y-reverse{syntax:"*";inherits:false;initial-value:0;}@property --tw-space-x-reverse{syntax:"*";inherits:false;initial-value:0;}@property --tw-border-style{syntax:"*";inherits:false;initial-value:solid;}@property --tw-leading{syntax:"*";inherits:false;}@property --tw-font-weight{syntax:"*";inherits:false;}@property --tw-tracking{syntax:"*";inherits:false;}@property --tw-shadow{syntax:"*";inherits:false;initial-value:0 0 #0000;}@property --tw-shadow-color{syntax:"*";inherits:false;}@property --tw-shadow-alpha{syntax:"<percentage>";inherits:false;initial-value:100%;}@property --tw-inset-shadow{syntax:"*";inherits:false;initial-value:0 0 #0000;}@property --tw-inset-shadow-color{syntax:"*";inherits:false;}@property --tw-inset-shadow-alpha{syntax:"<percentage>";inherits:false;initial-value:100%;}@property --tw-ring-color{syntax:"*";inherits:false;}@property --tw-ring-shadow{syntax:"*";inherits:false;initial-value:0 0 #0000;}@property --tw-inset-ring-color{syntax:"*";inherits:false;}@property --tw-inset-ring-shadow{syntax:"*";inherits:false;initial-value:0 0 #0000;}@property --tw-ring-inset{syntax:"*";inherits:false;}@property --tw-ring-offset-width{syntax:"<length>";inherits:false;initial-value:0px;}@property --tw-ring-offset-color{syntax:"*";inherits:false;initial-value:#fff;}@property --tw-ring-offset-shadow{syntax:"*";inherits:false;initial-value:0 0 #0000;}@property --tw-outline-style{syntax:"*";inherits:false;initial-value:solid;}@property --tw-blur{syntax:"*";inherits:false;}@property --tw-brightness{syntax:"*";inherits:false;}@property --tw-contrast{syntax:"*";inherits:false;}@property --tw-grayscale{syntax:"*";inherits:false;}@property --tw-hue-rotate{syntax:"*";inherits:false;}@property --tw-invert{syntax:"*";inherits:false;}@property --tw-opacity{syntax:"*";inherits:false;}@property --tw-saturate{syntax:"*";inherits:false;}@property --tw-sepia{syntax:"*";inherits:false;}@property --tw-drop-shadow{syntax:"*";inherits:false;}@property --tw-drop-shadow-color{syntax:"*";inherits:false;}@property --tw-drop-shadow-alpha{syntax:"<percentage>";inherits:false;initial-value:100%;}@property --tw-drop-shadow-size{syntax:"*";inherits:false;}@property --tw-duration{syntax:"*";inherits:false;}@property --tw-ease{syntax:"*";inherits:false;}@property --tw-scale-x{syntax:"*";inherits:false;initial-value:1;}@property --tw-scale-y{syntax:"*";inherits:false;initial-value:1;}@property --tw-scale-z{syntax:"*";inherits:false;initial-value:1;}@layer properties{@supports ((-webkit-hyphens: none) and (not (margin-trim: inline))) or ((-moz-orient: inline) and (not (color:rgb(from red r g b)))){*,:before,:after{--tw-translate-x:0;--tw-translate-y:0;--tw-translate-z:0;--tw-rotate-x:initial;--tw-rotate-y:initial;--tw-rotate-z:initial;--tw-skew-x:initial;--tw-skew-y:initial;--tw-space-y-reverse:0;--tw-space-x-reverse:0;--tw-border-style:solid;--tw-leading:initial;--tw-font-weight:initial;--tw-tracking:initial;--tw-shadow:0 0 #0000;--tw-shadow-color:initial;--tw-shadow-alpha:100%;--tw-inset-shadow:0 0 #0000;--tw-inset-shadow-color:initial;--tw-inset-shadow-alpha:100%;--tw-ring-color:initial;--tw-ring-shadow:0 0 #0000;--tw-inset-ring-color:initial;--tw-inset-ring-shadow:0 0 #0000;--tw-ring-inset:initial;--tw-ring-offset-width:0px;--tw-ring-offset-color:#fff;--tw-ring-offset-shadow:0 0 #0000;--tw-outline-style:solid;--tw-blur:initial;--tw-brightness:initial;--tw-contrast:initial;--tw-grayscale:initial;--tw-hue-rotate:initial;--tw-invert:initial;--tw-opacity:initial;--tw-saturate:initial;--tw-sepia:initial;--tw-drop-shadow:initial;--tw-drop-shadow-color:initial;--tw-drop-shadow-alpha:100%;--tw-drop-shadow-size:initial;--tw-duration:initial;--tw-ease:initial;--tw-scale-x:1;--tw-scale-y:1;--tw-scale-z:1}}}</style><link rel="stylesheet" href="styles-HW6JOOEJ.css" media="print" onload="this.media='all'"><noscript><link rel="stylesheet" href="styles-HW6JOOEJ.css"></noscript></head>
+  <body class="font-sans bg-surface-page text-gray-800">
+    <app-root></app-root>
+  <script src="polyfills-B6TNHZQ6.js" type="module"></script><script src="main-47RKVWAK.js" type="module"></script></body>
+</html>
