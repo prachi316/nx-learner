@@ -258,13 +258,6 @@ export class CourseDetailsComponent implements OnInit {
 
     // Close the modal
     this.closeExamModal();
-
-    // Simulate exam creation success and redirect to exam details
-    setTimeout(() => {
-      this.router.navigate(['/exam-details'], {
-        queryParams: { examId: examDetails.id },
-      });
-    }, 500);
   }
 
   // Helper method to get form control for template
