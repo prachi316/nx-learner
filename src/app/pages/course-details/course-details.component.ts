@@ -1,6 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
+import {
+  FormBuilder,
+  FormGroup,
+  Validators,
+  ReactiveFormsModule,
+  AbstractControl,
+} from '@angular/forms';
 import {
   IconComponent,
   TabsComponent,
@@ -9,6 +15,7 @@ import {
   TimeInputComponent,
   TextInputComponent,
   TextareaInputComponent,
+  RadioInputComponent,
 } from '@nx-learner/components';
 import {
   TabItem,
@@ -39,6 +46,7 @@ import {
     TimeInputComponent,
     TextInputComponent,
     TextareaInputComponent,
+    RadioInputComponent,
   ],
   templateUrl: './course-details.component.html',
   standalone: true,
@@ -62,19 +70,48 @@ export class CourseDetailsComponent implements OnInit {
   }
 
   private initializeForm(): void {
-    this.examForm = this.fb.group({
-      title: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(100)]],
-      description: ['', [Validators.required, Validators.minLength(10), Validators.maxLength(500)]],
-      startDate: ['', Validators.required],
-      startTime: ['', Validators.required],
-      dueDate: ['', Validators.required],
-      dueTime: ['', Validators.required],
-      duration: [
-        '',
-        [Validators.required, Validators.pattern(/^\d+\s*(min|minutes?|hr|hour|hours?)$/i)],
-      ],
-      attempts: [1, [Validators.required, Validators.min(1), Validators.max(10)]],
-    });
+    this.examForm = this.fb.group(
+      {
+        title: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(100)]],
+        description: ['', [Validators.maxLength(500)]], // Made optional, removed required
+        startDate: ['', Validators.required],
+        startTime: ['', Validators.required],
+        dueDate: ['', Validators.required],
+        dueTime: ['', Validators.required],
+        duration: [
+          '',
+          [Validators.required, Validators.pattern(/^\d+\s*(min|minutes?|hr|hour|hours?)$/i)],
+        ],
+        attempts: [1, [Validators.required, Validators.min(1), Validators.max(6)]], // Changed max to 6
+        viewCorrectAnswer: [false, Validators.required],
+      },
+      { validators: this.dateTimeValidator },
+    );
+  }
+
+  // Custom validator to ensure due date/time is after start date/time
+  private dateTimeValidator(form: AbstractControl) {
+    const startDate = form.get('startDate')?.value;
+    const startTime = form.get('startTime')?.value;
+    const dueDate = form.get('dueDate')?.value;
+    const dueTime = form.get('dueTime')?.value;
+
+    if (!startDate || !startTime || !dueDate || !dueTime) {
+      return null; // Let required validators handle missing values
+    }
+
+    try {
+      const startDateTime = new Date(`${startDate}T${startTime}`);
+      const dueDateTime = new Date(`${dueDate}T${dueTime}`);
+
+      if (dueDateTime <= startDateTime) {
+        return { dueDateInvalid: true };
+      }
+    } catch (error) {
+      return null; // Let other validators handle invalid dates
+    }
+
+    return null;
   }
 
   // Course information
@@ -104,6 +141,12 @@ export class CourseDetailsComponent implements OnInit {
 
   // Reactive form for exam creation
   examForm!: FormGroup;
+
+  // Radio options for View Correct Answer
+  viewCorrectAnswerOptions = [
+    { value: true, label: 'Yes' },
+    { value: false, label: 'No' },
+  ];
 
   onMainTabChange(tab: TabItem): void {
     console.log('Main tab changed:', tab);
@@ -196,6 +239,22 @@ export class CourseDetailsComponent implements OnInit {
   hasError(controlName: string, errorType: string): boolean {
     const control = this.getFormControl(controlName);
     return control ? control.hasError(errorType) && control.touched : false;
+  }
+
+  // Helper method to get character count for description
+  getDescriptionLength(): number {
+    const description = this.getFormControl('description')?.value || '';
+    return description.length;
+  }
+
+  // Helper method to get remaining characters for description
+  getRemainingCharacters(): number {
+    return 500 - this.getDescriptionLength();
+  }
+
+  // Helper method to check if form has due date validation error
+  hasDueDateError(): boolean {
+    return this.examForm.hasError('dueDateInvalid');
   }
 
   // Generate unique exam ID

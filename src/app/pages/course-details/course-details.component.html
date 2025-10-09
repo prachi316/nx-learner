@@ -324,30 +324,22 @@
 
       <!-- Description Field -->
       <div>
-        <label class="block text-sm font-medium text-gray-700 mb-2">
-          <span class="text-red-500">*</span> Description
-        </label>
+        <label class="block text-sm font-medium text-gray-700 mb-2"> Description </label>
         <app-textarea-input
           formControlName="description"
-          placeholder="Exam description"
+          placeholder="Exam description (optional)"
           [rows]="4"
           [maxLength]="500"
           [showCharCount]="true"
-          [hasError]="
-            hasError('description', 'required') ||
-            hasError('description', 'minlength') ||
-            hasError('description', 'maxlength')
-          "
+          [hasError]="hasError('description', 'maxlength')"
           [errorMessage]="
-            hasError('description', 'required')
-              ? 'Description is required'
-              : hasError('description', 'minlength')
-                ? 'Description must be at least 10 characters long'
-                : hasError('description', 'maxlength')
-                  ? 'Description must not exceed 500 characters'
-                  : ''
+            hasError('description', 'maxlength') ? 'Description must not exceed 500 characters' : ''
           "
         ></app-textarea-input>
+        <div class="flex justify-between text-sm text-gray-500 mt-1">
+          <span>{{ getDescriptionLength() }}/500 characters</span>
+          <span>{{ getRemainingCharacters() }} remaining</span>
+        </div>
       </div>
 
       <!-- Start Date & Time -->
@@ -385,8 +377,14 @@
           <app-date-input
             formControlName="dueDate"
             placeholder="Select date"
-            [hasError]="hasError('dueDate', 'required')"
-            [errorMessage]="hasError('dueDate', 'required') ? 'Due date is required' : ''"
+            [hasError]="hasError('dueDate', 'required') || hasDueDateError()"
+            [errorMessage]="
+              hasError('dueDate', 'required')
+                ? 'Due date is required'
+                : hasDueDateError()
+                  ? 'Due date must be after start date'
+                  : ''
+            "
           ></app-date-input>
         </div>
         <div>
@@ -396,11 +394,22 @@
           <app-time-input
             formControlName="dueTime"
             placeholder="Select time"
-            [hasError]="hasError('dueTime', 'required')"
-            [errorMessage]="hasError('dueTime', 'required') ? 'Due time is required' : ''"
+            [hasError]="hasError('dueTime', 'required') || hasDueDateError()"
+            [errorMessage]="
+              hasError('dueTime', 'required')
+                ? 'Due time is required'
+                : hasDueDateError()
+                  ? 'Due date/time must be after start date/time'
+                  : ''
+            "
           ></app-time-input>
         </div>
       </div>
+      @if (hasDueDateError()) {
+        <div class="text-red-500 text-sm mt-1">
+          Due date and time must be after start date and time
+        </div>
+      }
 
       <!-- Duration -->
       <div>
@@ -450,8 +459,26 @@
           <div class="text-red-500 text-sm mt-1">Minimum 1 attempt required</div>
         }
         @if (hasError('attempts', 'max')) {
-          <div class="text-red-500 text-sm mt-1">Maximum 10 attempts allowed</div>
+          <div class="text-red-500 text-sm mt-1">Maximum 6 attempts allowed</div>
         }
+      </div>
+
+      <!-- View Correct Answer -->
+      <div>
+        <label class="block text-sm font-medium text-gray-700 mb-2">
+          <span class="text-red-500">*</span> View Correct Answer
+        </label>
+        <app-radio-input
+          formControlName="viewCorrectAnswer"
+          name="viewCorrectAnswer"
+          [options]="viewCorrectAnswerOptions"
+          [hasError]="hasError('viewCorrectAnswer', 'required')"
+          [errorMessage]="
+            hasError('viewCorrectAnswer', 'required')
+              ? 'Please select whether to show correct answers'
+              : ''
+          "
+        ></app-radio-input>
       </div>
 
       <!-- Create Button -->
