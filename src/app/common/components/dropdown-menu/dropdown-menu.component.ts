@@ -34,7 +34,7 @@ export interface DropdownMenuItem {
       <!-- Dropdown Menu -->
       @if (isOpen) {
         <div
-          class="absolute right-0 mt-2 w-48 bg-white rounded-lg shadow-lg border border-gray-200 py-1 z-50"
+          class="absolute right-0 mt-2 w-40 bg-white rounded-lg shadow-lg border border-gray-200 py-1 z-50"
           [class]="menuClass"
         >
           @for (item of items; track item.id) {
