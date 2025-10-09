@@ -10,7 +10,8 @@
     "lint": "npx eslint \"src/**/*.{js,ts,html}\" --quiet --fix",
     "format": "npx prettier \"src/**/*.{js,ts,html,css,scss}\" --write",
     "prepare": "husky install",
-    "lint-staged": "lint-staged"
+    "lint-staged": "lint-staged",
+    "deploy": "ng build --configuration=production --base-href=/nx-learner/ && npx angular-cli-ghpages --dir=dist/nx-learner/browser"
   },
   "private": true,
   "dependencies": {

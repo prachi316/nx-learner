@@ -2,6 +2,12 @@
 
 A comprehensive Angular application that recreates a course management system UI/UX with full functionality using localStorage for data persistence.
 
+## 🌐 Live Demo
+
+**[View Live Application](https://prachi316.github.io/nx-learner/)**
+
+Experience the full functionality of the course management system with exam creation, editing, and management features.
+
 ## 🎯 Project Overview
 
 This project is a complete implementation of a course management system built with Angular 19, featuring:
