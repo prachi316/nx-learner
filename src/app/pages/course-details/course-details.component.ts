@@ -136,6 +136,7 @@ export class CourseDetailsComponent implements OnInit {
   // Exam data from localStorage
   exams: ExamDetails[] = [];
   currentCourseExams: ExamDetails[] = [];
+  filteredExams: ExamDetails[] = [];
 
   // Modal state
   isModalOpen = false;
@@ -156,9 +157,13 @@ export class CourseDetailsComponent implements OnInit {
   isEditModalOpen = false;
   examToEdit: ExamDetails | null = null;
 
+  // Tab state
+  currentTab: string = 'all';
+
   onMainTabChange(tab: TabItem): void {
     console.log('Main tab changed:', tab);
-    // Handle main tab change logic here
+    this.currentTab = tab.id;
+    this.filterExams();
   }
 
   onFilterBadgeClick(badge: BadgeItem): void {
@@ -213,6 +218,7 @@ export class CourseDetailsComponent implements OnInit {
         id: this.generateExamId(),
         createdAt: new Date().toISOString(),
         status: 'draft' as const,
+        isTodo: true, // New exams are marked as todo by default
         courseId: this.courseInfo.id,
         courseTitle: this.courseInfo.title,
       };
@@ -340,9 +346,38 @@ export class CourseDetailsComponent implements OnInit {
 
       // Filter exams for current course
       this.currentCourseExams = this.exams.filter((exam) => exam.courseId === this.courseInfo.id);
+
+      // Apply current tab filter
+      this.filterExams();
     } catch (error) {
       this.exams = [];
       this.currentCourseExams = [];
+      this.filteredExams = [];
+    }
+  }
+
+  // Filter exams based on current tab
+  private filterExams(): void {
+    if (this.currentTab === 'todo') {
+      this.filteredExams = this.currentCourseExams.filter((exam) => exam.isTodo === true);
+    } else {
+      this.filteredExams = this.currentCourseExams;
+    }
+
+    // Update Todo badge count
+    this.updateTodoBadgeCount();
+  }
+
+  // Update Todo badge count
+  private updateTodoBadgeCount(): void {
+    const todoCount = this.currentCourseExams.filter((exam) => exam.isTodo === true).length;
+    const todoTab = this.mainTabs.find((tab) => tab.id === 'todo');
+    if (todoTab) {
+      todoTab.badge = {
+        text: todoCount.toString(),
+        backgroundColor: '#EF4444',
+        color: 'white',
+      };
     }
   }
 
@@ -360,8 +395,6 @@ export class CourseDetailsComponent implements OnInit {
 
   // Get menu items for exam card
   getExamMenuItems(exam: ExamDetails): DropdownMenuItem[] {
-    const isTodo = exam.status === 'draft';
-
     return [
       {
         id: 'open',
@@ -377,8 +410,8 @@ export class CourseDetailsComponent implements OnInit {
       },
       {
         id: 'toggle-todo',
-        label: isTodo ? 'Mark as Done' : 'Mark as Todo',
-        icon: isTodo ? 'done' : 'todo',
+        label: exam.isTodo ? 'Mark as Done' : 'Mark as Todo',
+        icon: exam.isTodo ? 'done' : 'todo',
         action: 'toggle-todo',
       },
       {
@@ -439,26 +472,25 @@ export class CourseDetailsComponent implements OnInit {
     });
   }
 
-  // Toggle exam status between draft and published
+  // Toggle exam todo status
   toggleExamStatus(exam: ExamDetails): void {
-    const newStatus = exam.status === 'draft' ? 'published' : 'draft';
-    this.updateExamStatus(exam.id, newStatus);
+    this.updateExamTodoStatus(exam.id, !exam.isTodo);
   }
 
-  // Update exam status
-  private updateExamStatus(examId: string, newStatus: 'draft' | 'published' | 'completed'): void {
+  // Update exam todo status
+  private updateExamTodoStatus(examId: string, isTodo: boolean): void {
     try {
       const allExams = this.getExamsFromLocalStorage();
       const examIndex = allExams.findIndex((exam) => exam.id === examId);
 
       if (examIndex !== -1) {
-        allExams[examIndex].status = newStatus;
+        allExams[examIndex].isTodo = isTodo;
         localStorage.setItem('nx-learner-exams', JSON.stringify(allExams));
         this.refreshExams();
-        console.log(`Exam ${examId} status updated to ${newStatus}`);
+        console.log(`Exam ${examId} todo status updated to ${isTodo}`);
       }
     } catch (error) {
-      console.error('Error updating exam status:', error);
+      console.error('Error updating exam todo status:', error);
     }
   }
 
@@ -494,6 +526,7 @@ export class CourseDetailsComponent implements OnInit {
         dueDateTime: dueDateTime,
         createdAt: this.examToEdit.createdAt,
         status: this.examToEdit.status,
+        isTodo: this.examToEdit.isTodo,
         courseId: this.examToEdit.courseId,
         courseTitle: this.examToEdit.courseTitle,
       };

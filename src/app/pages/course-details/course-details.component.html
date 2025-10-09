@@ -227,7 +227,7 @@
           </div>
         } @else {
           <div class="flex flex-wrap gap-6">
-            @for (exam of currentCourseExams; track exam.id) {
+            @for (exam of filteredExams; track exam.id) {
               <div class="relative flex flex-col justify-center gap-2 items-center">
                 <!-- 3-Dot Menu -->
                 <div class="absolute top-2 right-2 z-10">
