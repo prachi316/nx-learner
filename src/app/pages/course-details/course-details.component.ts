@@ -245,7 +245,6 @@ export class CourseDetailsComponent implements OnInit {
       dueDateTime: dueDateTime,
       id: this.generateExamId(),
       createdAt: new Date().toISOString(),
-      status: 'draft' as const,
       isTodo: true, // New exams are marked as todo by default
       courseId: this.courseInfo.id,
       courseTitle: this.courseInfo.title,
@@ -503,7 +502,7 @@ export class CourseDetailsComponent implements OnInit {
     this.updateExamTodoStatus(exam.id, !exam.isTodo);
   }
 
-  // Update exam todo status
+  // Update exam todo status and status
   private updateExamTodoStatus(examId: string, isTodo: boolean): void {
     try {
       const allExams = this.getExamsFromLocalStorage();
@@ -511,6 +510,8 @@ export class CourseDetailsComponent implements OnInit {
 
       if (examIndex !== -1) {
         allExams[examIndex].isTodo = isTodo;
+        // Just update the isTodo status - no separate status property needed
+
         localStorage.setItem('nx-learner-exams', JSON.stringify(allExams));
         this.refreshExams();
         console.log(`Exam ${examId} todo status updated to ${isTodo}`);
@@ -551,7 +552,6 @@ export class CourseDetailsComponent implements OnInit {
         startDateTime: startDateTime,
         dueDateTime: dueDateTime,
         createdAt: this.examToEdit.createdAt,
-        status: this.examToEdit.status,
         isTodo: this.examToEdit.isTodo,
         courseId: this.examToEdit.courseId,
         courseTitle: this.examToEdit.courseTitle,

@@ -42,9 +42,11 @@
           <div>
             <label class="block text-sm font-medium text-gray-500 mb-2">Status</label>
             <span
-              class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium text-white bg-[#FF7C59]"
+              class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium text-white"
+              [class.bg-blue-500]="exam?.isTodo"
+              [class.bg-green-500]="!exam?.isTodo"
             >
-              {{ exam?.status | titlecase }}
+              {{ exam?.isTodo ? 'Draft' : 'Done' }}
             </span>
           </div>
         </div>

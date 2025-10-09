@@ -247,14 +247,12 @@
 
                 <!-- New Badge -->
                 <div class="absolute bottom-10 left-1/2 transform -translate-x-1/2">
-                  <span class="bg-blue-500 text-white text-xs font-bold px-3 py-1 rounded-full">
-                    {{
-                      exam.status === 'draft'
-                        ? 'Draft'
-                        : exam.status === 'published'
-                          ? 'Published'
-                          : 'Completed'
-                    }}
+                  <span
+                    class="text-white text-xs font-bold px-3 py-1 rounded-full"
+                    [class.bg-blue-500]="exam.isTodo"
+                    [class.bg-green-500]="!exam.isTodo"
+                  >
+                    {{ exam.isTodo ? 'Draft' : 'Done' }}
                   </span>
                 </div>
 

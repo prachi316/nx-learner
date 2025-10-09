@@ -170,7 +170,6 @@ export interface ExamFormData {
 export interface ExamDetails extends ExamFormData {
   id: string;
   createdAt: string;
-  status: 'draft' | 'published' | 'completed';
   isTodo: boolean;
   courseId: string;
   courseTitle: string;
