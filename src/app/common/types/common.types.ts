@@ -172,4 +172,6 @@ export interface ExamDetails extends ExamFormData {
   status: 'draft' | 'published' | 'completed';
   courseId: string;
   courseTitle: string;
+  startDateTime?: string;
+  dueDateTime?: string;
 }

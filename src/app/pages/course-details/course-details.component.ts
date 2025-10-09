@@ -129,7 +129,6 @@ export class CourseDetailsComponent implements OnInit {
   }
 
   onOptionSelect(option: string): void {
-    console.log('Option selected:', option);
     this.selectedOption = option;
     this.closeModal();
     // Open the create modal after a short delay
@@ -151,9 +150,15 @@ export class CourseDetailsComponent implements OnInit {
     if (this.examForm.valid) {
       const formData: ExamFormData = this.examForm.value;
 
+      // Combine start date and time into a single datetime string
+      const startDateTime = this.combineDateTime(formData.startDate, formData.startTime);
+      const dueDateTime = this.combineDateTime(formData.dueDate, formData.dueTime);
+
       // Add additional metadata
       const examDetails: ExamDetails = {
         ...formData,
+        startDateTime: startDateTime,
+        dueDateTime: dueDateTime,
         id: this.generateExamId(),
         createdAt: new Date().toISOString(),
         status: 'draft' as const,
@@ -167,8 +172,6 @@ export class CourseDetailsComponent implements OnInit {
       // Refresh exam data to include the new exam
       this.refreshExams();
 
-      console.log('Exam created and saved to localStorage:', examDetails);
-
       // Close the create modal
       this.closeCreateModal();
 
@@ -181,7 +184,6 @@ export class CourseDetailsComponent implements OnInit {
     } else {
       // Mark all fields as touched to show validation errors
       this.examForm.markAllAsTouched();
-      console.log('Form is invalid:', this.examForm.errors);
     }
   }
 
@@ -201,6 +203,30 @@ export class CourseDetailsComponent implements OnInit {
     return 'exam_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9);
   }
 
+  // Combine date and time into a single datetime string
+  private combineDateTime(date: string, time: string): string {
+    if (!date || !time) {
+      return '';
+    }
+
+    try {
+      // Create a date object from the date string
+      const dateObj = new Date(date);
+
+      // Extract time components
+      const [hours, minutes] = time.split(':').map(Number);
+
+      // Set the time on the date object
+      dateObj.setHours(hours, minutes, 0, 0);
+
+      // Return ISO string
+      return dateObj.toISOString();
+    } catch (error) {
+      console.error('Error combining date and time:', error);
+      return `${date}T${time}:00.000Z`;
+    }
+  }
+
   // Save exam to localStorage
   private saveExamToLocalStorage(examDetails: ExamDetails): void {
     try {
@@ -212,8 +238,6 @@ export class CourseDetailsComponent implements OnInit {
 
       // Save back to localStorage
       localStorage.setItem('nx-learner-exams', JSON.stringify(existingExams));
-
-      console.log('Exam saved to localStorage successfully');
     } catch (error) {
       console.error('Error saving exam to localStorage:', error);
     }
