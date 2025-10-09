@@ -140,7 +140,6 @@ export class CourseDetailsComponent implements OnInit {
 
   // Modal state
   isModalOpen = false;
-  isCreateModalOpen = false;
   selectedOption = '';
 
   // Reactive form for exam creation
@@ -194,11 +193,11 @@ export class CourseDetailsComponent implements OnInit {
   }
 
   openCreateModal(): void {
-    this.isCreateModalOpen = true;
+    this.isEditModalOpen = true;
   }
 
   closeCreateModal(): void {
-    this.isCreateModalOpen = false;
+    this.isEditModalOpen = false;
     this.selectedOption = '';
   }
 
