@@ -155,6 +155,7 @@ export class CourseDetailsComponent implements OnInit {
   selectedExamId: string | null = null;
   isEditModalOpen = false;
   examToEdit: ExamDetails | null = null;
+  isEditMode = false; // Flag to determine if we're creating or editing
 
   // Tab state
   currentTab: string = 'all';
@@ -193,54 +194,78 @@ export class CourseDetailsComponent implements OnInit {
   }
 
   openCreateModal(): void {
+    this.isEditMode = false;
+    this.examToEdit = null;
     this.isEditModalOpen = true;
+    this.initializeForm(); // Reset form for new exam
   }
 
   closeCreateModal(): void {
     this.isEditModalOpen = false;
     this.selectedOption = '';
+    this.isEditMode = false;
+    this.examToEdit = null;
   }
 
-  onCreateExam(): void {
+  // Unified close method for both create and edit
+  closeExamModal(): void {
+    this.isEditModalOpen = false;
+    this.isEditMode = false;
+    this.examToEdit = null;
+    this.selectedOption = '';
+    this.examForm.reset();
+    this.initializeForm();
+  }
+
+  // Unified submit method for both create and edit
+  onSubmitExam(): void {
     if (this.examForm.valid) {
-      const formData: ExamFormData = this.examForm.value;
-
-      // Combine start date and time into a single datetime string
-      const startDateTime = this.combineDateTime(formData.startDate, formData.startTime);
-      const dueDateTime = this.combineDateTime(formData.dueDate, formData.dueTime);
-
-      // Add additional metadata
-      const examDetails: ExamDetails = {
-        ...formData,
-        startDateTime: startDateTime,
-        dueDateTime: dueDateTime,
-        id: this.generateExamId(),
-        createdAt: new Date().toISOString(),
-        status: 'draft' as const,
-        isTodo: true, // New exams are marked as todo by default
-        courseId: this.courseInfo.id,
-        courseTitle: this.courseInfo.title,
-      };
-
-      // Store exam details in localStorage
-      this.saveExamToLocalStorage(examDetails);
-
-      // Refresh exam data to include the new exam
-      this.refreshExams();
-
-      // Close the create modal
-      this.closeCreateModal();
-
-      // Simulate exam creation success and redirect to exam details
-      setTimeout(() => {
-        this.router.navigate(['/exam-details'], {
-          queryParams: { examId: examDetails.id },
-        });
-      }, 500);
+      if (this.isEditMode) {
+        this.onUpdateExam();
+      } else {
+        this.onCreateExam();
+      }
     } else {
       // Mark all fields as touched to show validation errors
       this.examForm.markAllAsTouched();
     }
+  }
+
+  onCreateExam(): void {
+    const formData: ExamFormData = this.examForm.value;
+
+    // Combine start date and time into a single datetime string
+    const startDateTime = this.combineDateTime(formData.startDate, formData.startTime);
+    const dueDateTime = this.combineDateTime(formData.dueDate, formData.dueTime);
+
+    // Add additional metadata
+    const examDetails: ExamDetails = {
+      ...formData,
+      startDateTime: startDateTime,
+      dueDateTime: dueDateTime,
+      id: this.generateExamId(),
+      createdAt: new Date().toISOString(),
+      status: 'draft' as const,
+      isTodo: true, // New exams are marked as todo by default
+      courseId: this.courseInfo.id,
+      courseTitle: this.courseInfo.title,
+    };
+
+    // Store exam details in localStorage
+    this.saveExamToLocalStorage(examDetails);
+
+    // Refresh exam data to include the new exam
+    this.refreshExams();
+
+    // Close the modal
+    this.closeExamModal();
+
+    // Simulate exam creation success and redirect to exam details
+    setTimeout(() => {
+      this.router.navigate(['/exam-details'], {
+        queryParams: { examId: examDetails.id },
+      });
+    }, 500);
   }
 
   // Helper method to get form control for template
@@ -443,6 +468,7 @@ export class CourseDetailsComponent implements OnInit {
 
   // Open edit modal
   openEditModal(exam: ExamDetails): void {
+    this.isEditMode = true;
     this.examToEdit = exam;
     this.isEditModalOpen = true;
     this.populateFormForEdit(exam);
@@ -452,6 +478,7 @@ export class CourseDetailsComponent implements OnInit {
   closeEditModal(): void {
     this.isEditModalOpen = false;
     this.examToEdit = null;
+    this.isEditMode = false;
     this.examForm.reset();
     this.initializeForm();
   }
@@ -536,8 +563,8 @@ export class CourseDetailsComponent implements OnInit {
       // Refresh exam data
       this.refreshExams();
 
-      // Close the edit modal
-      this.closeEditModal();
+      // Close the modal
+      this.closeExamModal();
     } else {
       this.examForm.markAllAsTouched();
     }
