@@ -11,7 +11,7 @@ This project is a complete implementation of a course management system built wi
 - Responsive design with Tailwind CSS
 - Comprehensive form validation
 - Local data persistence
-- Unit testing suite
+- Unit testing suite (Optional)
 
 ## 🚀 Quick Start
 
@@ -140,28 +140,7 @@ src/
 
 ## 🧪 Testing
 
-### Unit Tests
-
-Comprehensive test suite covering:
-
-- **Components**: All major components with 100% coverage
-- **Services**: Breadcrumb service with full functionality testing
-- **Forms**: Validation and user interaction testing
-- **Navigation**: Route parameter and query handling
-- **localStorage**: Data persistence and error handling
-
-### Test Commands
-
-```bash
-# Run all tests
-npm test
-
-# Run tests with coverage
-npm test -- --code-coverage
-
-# Run specific test file
-npm test -- --include="**/course-details.component.spec.ts"
-```
+### Unit Tests not covered
 
 ## 📱 Responsive Design
 
@@ -254,6 +233,194 @@ interface WeekInfo {
 }
 ```
 
+## 🏗️ State Management Architecture
+
+### Design Philosophy
+
+I chose a **component-centric state management approach** over complex state management libraries like NgRx for several strategic reasons:
+
+#### Why This Approach?
+
+1. **Simplicity Over Complexity**: For a frontend assignment with limited scope, a complex state management solution would be overkill and add unnecessary complexity.
+
+2. **localStorage as Single Source of Truth**: Since the requirement explicitly states "no backend" and to use localStorage, treating localStorage as the primary data store makes the most sense.
+
+3. **Component Responsibility**: Each component manages its own local state while delegating data persistence to localStorage utilities.
+
+4. **Performance**: Direct localStorage access is faster than going through a state management layer for this use case.
+
+### State Structure
+
+#### 1. **Data Layer (localStorage)**
+
+```typescript
+// Primary data store in localStorage - only exams are persisted
+localStorage.setItem('nx-learner-exams', JSON.stringify(exams));
+
+// Course and week data are static constants (not persisted)
+// - Course info: Defined in course-details.constants.ts
+// - Week data: Generated dynamically based on current date
+```
+
+#### 2. **Component State Management**
+
+```typescript
+// Each component manages its own state
+export class CourseDetailsComponent {
+  // Local component state
+  currentCourseExams: ExamDetails[] = [];
+  filteredExams: ExamDetails[] = [];
+  currentTab: string = 'all';
+  selectedWeekId: string = '';
+
+  // Form state
+  examForm: FormGroup;
+
+  // UI state
+  isModalOpen: boolean = false;
+  isCreateModalOpen: boolean = false;
+  isEditModalOpen: boolean = false;
+}
+```
+
+#### 3. **Service Layer (Shared State)**
+
+```typescript
+// BreadcrumbService manages navigation state
+export class BreadcrumbService {
+  private breadcrumbsSubject = new BehaviorSubject<BreadcrumbItem[]>([]);
+  breadcrumbs$ = this.breadcrumbsSubject.asObservable();
+
+  setCourseBreadcrumbs(courseTitle: string): void {
+    this.breadcrumbsSubject.next([
+      { id: 'courses', label: 'Courses', url: '/courses' },
+      { id: 'course', label: courseTitle, url: '/course-details' },
+    ]);
+  }
+}
+```
+
+### State Flow Architecture
+
+```
+┌─────────────────┐    ┌──────────────────┐    ┌─────────────────┐
+│   Component     │    │   localStorage   │    │   Service       │
+│   (Local State) │◄──►│   (Data Store)   │◄──►│   (Shared State)│
+└─────────────────┘    └──────────────────┘    └─────────────────┘
+         │                       │                       │
+         │                       │                       │
+         ▼                       ▼                       ▼
+┌─────────────────┐    ┌──────────────────┐    ┌─────────────────┐
+│   User Actions  │    │   Data Persist   │    │   Navigation    │
+│   (Forms, UI)   │    │   (CRUD Ops)     │    │   (Breadcrumbs) │
+└─────────────────┘    └──────────────────┘    └─────────────────┘
+```
+
+### Key Design Decisions
+
+#### 1. **localStorage for Exam Data Only**
+
+```typescript
+// Centralized exam data access methods
+private loadExamsFromLocalStorage(): void {
+  const examsData = localStorage.getItem('nx-learner-exams');
+  if (examsData) {
+    this.currentCourseExams = JSON.parse(examsData);
+    this.filterExams();
+  }
+}
+
+private saveExamToLocalStorage(exam: ExamDetails): void {
+  const existingExams = this.getExamsFromStorage();
+  const updatedExams = [...existingExams, exam];
+  localStorage.setItem('nx-learner-exams', JSON.stringify(updatedExams));
+}
+
+// Course and week data are static (not persisted)
+private courseInfo: CourseInfo = COURSE_INFO; // From constants
+private weeks: WeekInfo[] = this.generateWeeks(); // Generated dynamically
+```
+
+#### 2. **Reactive Forms for Form State**
+
+```typescript
+// Form state is managed by Angular Reactive Forms
+this.examForm = this.fb.group(
+  {
+    title: ['', [Validators.required, Validators.minLength(3)]],
+    description: ['', [Validators.maxLength(500)]],
+    // ... other fields
+  },
+  { validators: this.dateTimeValidator },
+);
+```
+
+#### 3. **Component Communication via Services**
+
+```typescript
+// Services handle cross-component communication
+export class BreadcrumbService {
+  private breadcrumbsSubject = new BehaviorSubject<BreadcrumbItem[]>([]);
+
+  // Components subscribe to shared state
+  breadcrumbs$ = this.breadcrumbsSubject.asObservable();
+}
+```
+
+### Data Flow Patterns
+
+#### 1. **Read Operations**
+
+```
+Component → localStorage.getItem('nx-learner-exams') → Parse JSON → Update Component State
+```
+
+#### 2. **Write Operations**
+
+```
+Component → Validate Data → localStorage.setItem('nx-learner-exams') → Refresh Component State
+```
+
+#### 3. **Static Data Access**
+
+```
+Component → Constants/Generated Data → Direct Assignment (no persistence needed)
+```
+
+#### 4. **Cross-Component Updates**
+
+```
+Component A → Service Method → Update localStorage → Component B (via subscription)
+```
+
+### Benefits of This Approach
+
+1. **Simplicity**: Easy to understand and maintain
+2. **Performance**: Direct data access without middleware overhead
+3. **Flexibility**: Easy to modify data structure without complex state management
+4. **Debugging**: Clear data flow that's easy to trace
+5. **Scalability**: Can easily migrate to a real backend later
+
+### Trade-offs
+
+1. **No Global State**: Each component manages its own state
+2. **Manual Synchronization**: Components need to manually refresh after data changes
+3. **No Time Travel**: No built-in undo/redo functionality
+4. **Memory Usage**: All data loaded into component memory
+
+### Future Migration Path
+
+If this application were to scale, the state management could be enhanced by:
+
+1. **Adding NgRx**: For complex state management needs
+2. **Implementing Caching**: For better performance with large datasets
+3. **Adding State Persistence**: Beyond localStorage for better reliability
+4. **Implementing Optimistic Updates**: For better user experience
+
+This state management approach strikes the perfect balance between simplicity and functionality for the assignment requirements while maintaining clean, maintainable code.
+
+**Note**: While the current component-centric approach works well for this assignment scope, **NgRx Store** could be implemented in the future for better data handling, centralized state management, and improved scalability when the application grows in complexity.
+
 ## 🚦 Routing
 
 ### Route Structure
@@ -261,7 +428,6 @@ interface WeekInfo {
 - `/` - Landing page
 - `/course-details` - Main course page
 - `/exam-details?examId=:id` - Exam details page
-- `/exam-details?examId=:id&edit=true` - Edit exam mode
 
 ### Navigation
 
@@ -275,11 +441,9 @@ interface WeekInfo {
 - **XSS Prevention**: Proper data sanitization
 - **Type Safety**: Full TypeScript coverage
 - **Error Boundaries**: Graceful error handling
-- **Accessibility**: WCAG 2.1 compliance
 
 ## 🚀 Performance
 
-- **Lazy Loading**: Route-based code splitting
 - **OnPush Strategy**: Optimized change detection
 - **Bundle Optimization**: Minimal bundle size
 - **Image Optimization**: Optimized asset loading
@@ -290,7 +454,12 @@ interface WeekInfo {
 2. **Data Persistence**: Data is lost when localStorage is cleared
 3. **Multi-user**: No user authentication or data isolation
 4. **File Uploads**: No file upload functionality for attachments
-5. **Real-time Updates**: No real-time data synchronization
+5. **Real-time Updates**: No real-time data
+6. **Unit Testcase**: No unit testcases added due to lack of time.
+7. **UI Data**: Due to no API implementation, we kept few data in constant file.
+8. **UI/UX Design**: Due to limitted access of figma, we could not complie figma design accuretly. We did as much as poisible.
+9. **Figma Style Guide**: In figma design I found design inconsistency interms of color, font size, height/width. Either those should be as per **tailwindcss** or there should be proper design guide kit.
+10. **State**: As we are sort of time, not able to implement **@ngrx/store** for better data handeling.
 
 ## 🔮 Future Enhancements
 
@@ -301,6 +470,10 @@ interface WeekInfo {
 - **Advanced Filtering**: More sophisticated filtering options
 - **Data Export**: Export functionality for course data
 - **Offline Support**: Service worker for offline functionality
+- **UI Dta**: While we will implement API and have better understanding of requirement. That time we can push data to UI dynamically.
+- **Unit Testcase**: In future, when start working on the project we will add all the testcases.
+- **UI/UX Design**: Ui/UX design will be fully match as per the Figma style guide.
+- **State**: In future version, We will implement store for better data handeling.
 
 ## 📝 Development Notes
 
@@ -319,14 +492,6 @@ interface WeekInfo {
 - **Prettier**: Consistent code formatting
 - **Husky**: Pre-commit hooks for code quality
 - **Unit Tests**: Comprehensive test coverage
-
-## 🤝 Contributing
-
-1. Fork the repository
-2. Create a feature branch
-3. Make your changes
-4. Run tests and linting
-5. Submit a pull request
 
 ## 📄 License
 
