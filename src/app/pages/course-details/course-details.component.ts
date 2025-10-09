@@ -1,6 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
+import {
+  FormBuilder,
+  FormGroup,
+  Validators,
+  ReactiveFormsModule,
+  AbstractControl,
+} from '@angular/forms';
 import {
   IconComponent,
   TabsComponent,
@@ -9,6 +15,9 @@ import {
   TimeInputComponent,
   TextInputComponent,
   TextareaInputComponent,
+  RadioInputComponent,
+  DropdownMenuComponent,
+  DropdownMenuItem,
 } from '@nx-learner/components';
 import {
   TabItem,
@@ -39,6 +48,8 @@ import {
     TimeInputComponent,
     TextInputComponent,
     TextareaInputComponent,
+    RadioInputComponent,
+    DropdownMenuComponent,
   ],
   templateUrl: './course-details.component.html',
   standalone: true,
@@ -62,19 +73,48 @@ export class CourseDetailsComponent implements OnInit {
   }
 
   private initializeForm(): void {
-    this.examForm = this.fb.group({
-      title: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(100)]],
-      description: ['', [Validators.required, Validators.minLength(10), Validators.maxLength(500)]],
-      startDate: ['', Validators.required],
-      startTime: ['', Validators.required],
-      dueDate: ['', Validators.required],
-      dueTime: ['', Validators.required],
-      duration: [
-        '',
-        [Validators.required, Validators.pattern(/^\d+\s*(min|minutes?|hr|hour|hours?)$/i)],
-      ],
-      attempts: [1, [Validators.required, Validators.min(1), Validators.max(10)]],
-    });
+    this.examForm = this.fb.group(
+      {
+        title: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(100)]],
+        description: ['', [Validators.maxLength(500)]], // Made optional, removed required
+        startDate: ['', Validators.required],
+        startTime: ['', Validators.required],
+        dueDate: ['', Validators.required],
+        dueTime: ['', Validators.required],
+        duration: [
+          '',
+          [Validators.required, Validators.pattern(/^\d+\s*(min|minutes?|hr|hour|hours?)$/i)],
+        ],
+        attempts: [1, [Validators.required, Validators.min(1), Validators.max(6)]], // Changed max to 6
+        viewCorrectAnswer: [false, Validators.required],
+      },
+      { validators: this.dateTimeValidator },
+    );
+  }
+
+  // Custom validator to ensure due date/time is after start date/time
+  private dateTimeValidator(form: AbstractControl) {
+    const startDate = form.get('startDate')?.value;
+    const startTime = form.get('startTime')?.value;
+    const dueDate = form.get('dueDate')?.value;
+    const dueTime = form.get('dueTime')?.value;
+
+    if (!startDate || !startTime || !dueDate || !dueTime) {
+      return null; // Let required validators handle missing values
+    }
+
+    try {
+      const startDateTime = new Date(`${startDate}T${startTime}`);
+      const dueDateTime = new Date(`${dueDate}T${dueTime}`);
+
+      if (dueDateTime <= startDateTime) {
+        return { dueDateInvalid: true };
+      }
+    } catch (error) {
+      return null; // Let other validators handle invalid dates
+    }
+
+    return null;
   }
 
   // Course information
@@ -104,6 +144,17 @@ export class CourseDetailsComponent implements OnInit {
 
   // Reactive form for exam creation
   examForm!: FormGroup;
+
+  // Radio options for View Correct Answer
+  viewCorrectAnswerOptions = [
+    { value: true, label: 'Yes' },
+    { value: false, label: 'No' },
+  ];
+
+  // Menu state
+  selectedExamId: string | null = null;
+  isEditModalOpen = false;
+  examToEdit: ExamDetails | null = null;
 
   onMainTabChange(tab: TabItem): void {
     console.log('Main tab changed:', tab);
@@ -198,6 +249,22 @@ export class CourseDetailsComponent implements OnInit {
     return control ? control.hasError(errorType) && control.touched : false;
   }
 
+  // Helper method to get character count for description
+  getDescriptionLength(): number {
+    const description = this.getFormControl('description')?.value || '';
+    return description.length;
+  }
+
+  // Helper method to get remaining characters for description
+  getRemainingCharacters(): number {
+    return 500 - this.getDescriptionLength();
+  }
+
+  // Helper method to check if form has due date validation error
+  hasDueDateError(): boolean {
+    return this.examForm.hasError('dueDateInvalid');
+  }
+
   // Generate unique exam ID
   private generateExamId(): string {
     return 'exam_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9);
@@ -289,5 +356,174 @@ export class CourseDetailsComponent implements OnInit {
     this.router.navigate(['/exam-details'], {
       queryParams: { examId: examId },
     });
+  }
+
+  // Get menu items for exam card
+  getExamMenuItems(exam: ExamDetails): DropdownMenuItem[] {
+    const isTodo = exam.status === 'draft';
+
+    return [
+      {
+        id: 'open',
+        label: 'Open',
+        icon: 'open',
+        action: 'open',
+      },
+      {
+        id: 'edit',
+        label: 'Edit',
+        icon: 'edit',
+        action: 'edit',
+      },
+      {
+        id: 'toggle-todo',
+        label: isTodo ? 'Mark as Done' : 'Mark as Todo',
+        icon: isTodo ? 'done' : 'todo',
+        action: 'toggle-todo',
+      },
+      {
+        id: 'delete',
+        label: 'Delete',
+        icon: 'delete',
+        action: 'delete',
+        danger: true,
+      },
+    ];
+  }
+
+  // Handle menu item click
+  onExamMenuClick(item: DropdownMenuItem, exam: ExamDetails): void {
+    switch (item.action) {
+      case 'open':
+        this.onExamClick(exam.id);
+        break;
+      case 'edit':
+        this.openEditModal(exam);
+        break;
+      case 'toggle-todo':
+        this.toggleExamStatus(exam);
+        break;
+      case 'delete':
+        this.deleteExam(exam);
+        break;
+    }
+  }
+
+  // Open edit modal
+  openEditModal(exam: ExamDetails): void {
+    this.examToEdit = exam;
+    this.isEditModalOpen = true;
+    this.populateFormForEdit(exam);
+  }
+
+  // Close edit modal
+  closeEditModal(): void {
+    this.isEditModalOpen = false;
+    this.examToEdit = null;
+    this.examForm.reset();
+    this.initializeForm();
+  }
+
+  // Populate form for editing
+  private populateFormForEdit(exam: ExamDetails): void {
+    this.examForm.patchValue({
+      title: exam.title,
+      description: exam.description,
+      startDate: exam.startDate,
+      startTime: exam.startTime,
+      dueDate: exam.dueDate,
+      dueTime: exam.dueTime,
+      duration: exam.duration,
+      attempts: exam.attempts,
+      viewCorrectAnswer: exam.viewCorrectAnswer,
+    });
+  }
+
+  // Toggle exam status between draft and published
+  toggleExamStatus(exam: ExamDetails): void {
+    const newStatus = exam.status === 'draft' ? 'published' : 'draft';
+    this.updateExamStatus(exam.id, newStatus);
+  }
+
+  // Update exam status
+  private updateExamStatus(examId: string, newStatus: 'draft' | 'published' | 'completed'): void {
+    try {
+      const allExams = this.getExamsFromLocalStorage();
+      const examIndex = allExams.findIndex((exam) => exam.id === examId);
+
+      if (examIndex !== -1) {
+        allExams[examIndex].status = newStatus;
+        localStorage.setItem('nx-learner-exams', JSON.stringify(allExams));
+        this.refreshExams();
+        console.log(`Exam ${examId} status updated to ${newStatus}`);
+      }
+    } catch (error) {
+      console.error('Error updating exam status:', error);
+    }
+  }
+
+  // Delete exam
+  deleteExam(exam: ExamDetails): void {
+    if (confirm(`Are you sure you want to delete "${exam.title}"?`)) {
+      try {
+        const allExams = this.getExamsFromLocalStorage();
+        const filteredExams = allExams.filter((e) => e.id !== exam.id);
+        localStorage.setItem('nx-learner-exams', JSON.stringify(filteredExams));
+        this.refreshExams();
+        console.log(`Exam ${exam.id} deleted`);
+      } catch (error) {
+        console.error('Error deleting exam:', error);
+      }
+    }
+  }
+
+  // Update exam (for edit functionality)
+  onUpdateExam(): void {
+    if (this.examForm.valid && this.examToEdit) {
+      const formData: ExamFormData = this.examForm.value;
+
+      // Combine start date and time into a single datetime string
+      const startDateTime = this.combineDateTime(formData.startDate, formData.startTime);
+      const dueDateTime = this.combineDateTime(formData.dueDate, formData.dueTime);
+
+      // Update exam details
+      const updatedExam: ExamDetails = {
+        ...formData,
+        id: this.examToEdit.id,
+        startDateTime: startDateTime,
+        dueDateTime: dueDateTime,
+        createdAt: this.examToEdit.createdAt,
+        status: this.examToEdit.status,
+        courseId: this.examToEdit.courseId,
+        courseTitle: this.examToEdit.courseTitle,
+      };
+
+      // Update exam in localStorage
+      this.updateExamInLocalStorage(updatedExam);
+
+      // Refresh exam data
+      this.refreshExams();
+
+      // Close the edit modal
+      this.closeEditModal();
+    } else {
+      this.examForm.markAllAsTouched();
+    }
+  }
+
+  // Update exam in localStorage
+  private updateExamInLocalStorage(updatedExam: ExamDetails): void {
+    try {
+      const allExams = this.getExamsFromLocalStorage();
+      const examIndex = allExams.findIndex((exam) => exam.id === updatedExam.id);
+
+      if (examIndex !== -1) {
+        allExams[examIndex] = updatedExam;
+        localStorage.setItem('nx-learner-exams', JSON.stringify(allExams));
+        console.log(`Exam ${updatedExam.id} updated`);
+      }
+    } catch (error) {
+      console.error('Error updating exam:', error);
+    }
   }
 }

@@ -164,6 +164,7 @@ export interface ExamFormData {
   dueTime: string;
   duration: string;
   attempts: number;
+  viewCorrectAnswer: boolean;
 }
 
 export interface ExamDetails extends ExamFormData {
