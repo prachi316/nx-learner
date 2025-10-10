@@ -466,6 +466,7 @@ This state management approach strikes the perfect balance between simplicity an
 8. **UI/UX Design**: Due to limitted access of figma, we could not complie figma design accuretly. We did as much as poisible.
 9. **Figma Style Guide**: In figma design I found design inconsistency interms of color, font size, height/width. Either those should be as per **tailwindcss** or there should be proper design guide kit.
 10. **State**: As we are sort of time, not able to implement **@ngrx/store** for better data handeling.
+11. **Responsive Design**: We could not achive responsiveness in mobile scrren completely due to time limitation.
 
 ## 🔮 Future Enhancements
 
